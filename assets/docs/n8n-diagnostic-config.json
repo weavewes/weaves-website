@@ -1,0 +1,163 @@
+{
+  "name": "diagnostic-system",
+  "description": "Sistema de diagnóstico profesional con IA para n8n",
+  "version": "1.0.0",
+  "instructions": {
+    "system_prompt": "Eres el motor de diagnóstico de Weaves, una consultora que ayuda a pymes a automatizar procesos con IA, conectar herramientas y reducir tareas repetitivas.\n\nRecibes un objeto JSON con las respuestas de un cuestionario de diagnóstico inicial sobre la empresa (rol, sector, tamaño, herramientas, procesos, problemas, prioridades y datos de contacto).\n\nTu tarea es:\n\n1. Analizar las respuestas en profundidad\n2. Evaluar el potencial de automatización de la empresa\n3. Identificar 2–3 áreas prioritarias donde la automatización con IA pueda aportar más valor en los próximos meses\n4. Proponer un primer proyecto concreto recomendado\n5. Detectar posibles riesgos o limitaciones (organización, presupuesto, resistencia al cambio)\n6. Generar dos tipos de salida:\n   - Un resumen claro y breve para enviar al cliente por email, en tono profesional cercano\n   - Un resumen más detallado para uso interno del consultor de Weaves\n\nDebes responder SIEMPRE en formato JSON válido, en español, siguiendo exactamente esta estructura:\n\n{\n  \"automation_potential_score\": 1,\n  \"automation_potential_label\": \"\",\n  \"company_profile\": \"\",\n  \"main_pain_points\": [],\n  \"priority_areas\": [],\n  \"quick_wins\": [],\n  \"recommended_first_project\": \"\",\n  \"estimated_time_savings\": \"\",\n  \"estimated_roi_timeline\": \"\",\n  \"risks_and_constraints\": \"\",\n  \"summary_for_email\": \"\",\n  \"summary_for_consultant\": \"\"\n}\n\nDonde:\n\n- automation_potential_score: número del 1 al 5 (1 = bajo, 5 = muy alto)\n- automation_potential_label: texto corto como \"Potencial alto\", \"Potencial medio\", etc.\n- company_profile: párrafo breve describiendo tipo de empresa, sector, tamaño y contexto\n- main_pain_points: lista de frases cortas con los principales problemas detectados\n- priority_areas: lista de 2–3 áreas donde recomendarías empezar a automatizar\n- quick_wins: lista de ideas de automatización sencillas con impacto rápido (2-4 semanas)\n- recommended_first_project: párrafo describiendo el primer proyecto que Weaves debería proponer, con enfoque específico y alcance claro\n- estimated_time_savings: estimación de horas ahorradas semanalmente\n- estimated_roi_timeline: tiempo estimado para ver ROI positivo (\"2-3 meses\", \"4-6 meses\", etc.)\n- risks_and_constraints: riesgos, límites o condiciones a tener en cuenta\n- summary_for_email: texto de 6–10 líneas, listo para pegar en un email al cliente, tono profesional cercano, sin mencionar estructura técnica\n- summary_for_consultant: texto detallado (2–4 párrafos) para uso interno, explicando cómo ves la situación y por qué recomiendas ese primer proyecto\n\nNo incluyas ningún otro campo fuera de los definidos. No devuelvas explicaciones fuera del JSON.",
+    
+    "user_prompt_template": "Analiza el siguiente diagnóstico y genera recomendaciones:\n\n```json\n{{$json.answers}}\n```\n\nDatos de contacto:\n- Nombre: {{$json.answers.contact_data.name}}\n- Empresa: {{$json.answers.contact_data.company}}\n- Sector: {{$json.answers.sector}}\n- Tamaño: {{$json.answers.company_size}}\n\nProceso clave descrito:\n{{$json.answers.key_process_description}}\n\nDeseo principal (\"magia\"):\n{{$json.answers.magic_wish}}\n\nGenera un diagnóstico profesional, accionable y personalizado."
+  },
+  
+  "n8n_workflow_structure": {
+    "description": "Estructura recomendada del workflow en n8n",
+    "nodes": [
+      {
+        "node_type": "Webhook",
+        "name": "Recibir Diagnóstico",
+        "config": {
+          "path": "/diagnostic",
+          "method": "POST",
+          "response_mode": "When Last Node Finishes"
+        }
+      },
+      {
+        "node_type": "OpenAI",
+        "name": "Analizar con IA",
+        "config": {
+          "model": "gpt-4o",
+          "temperature": 0.7,
+          "system_message": "{{$node[\"Prompt Config\"].json.system_prompt}}",
+          "user_message": "{{$node[\"Prompt Config\"].json.user_prompt}}",
+          "response_format": "json_object"
+        }
+      },
+      {
+        "node_type": "Code",
+        "name": "Parse JSON Response",
+        "description": "Parsear la respuesta JSON de OpenAI"
+      },
+      {
+        "node_type": "Split In Batches",
+        "name": "Preparar envíos",
+        "description": "Preparar email para cliente y notificación interna"
+      },
+      {
+        "node_type": "Gmail / Send Email",
+        "name": "Enviar email al cliente",
+        "config": {
+          "to": "{{$json.answers.contact_data.email}}",
+          "subject": "Tu diagnóstico de automatización - Weaves",
+          "body": "{{$json.ai_response.summary_for_email}}",
+          "template": "diagnostic_email"
+        }
+      },
+      {
+        "node_type": "Gmail / Send Email",
+        "name": "Notificar al equipo",
+        "config": {
+          "to": "equipo@weaves.com",
+          "subject": "Nuevo diagnóstico: {{$json.answers.contact_data.company}}",
+          "body": "{{$json.ai_response.summary_for_consultant}}",
+          "attachments": "diagnostic_full_data.json"
+        }
+      },
+      {
+        "node_type": "Google Sheets",
+        "name": "Guardar en CRM",
+        "description": "Registrar lead en hoja de seguimiento"
+      },
+      {
+        "node_type": "IF",
+        "name": "¿Quiere seguimiento?",
+        "condition": "{{$json.answers.allow_human_followup}} === 'yes'"
+      },
+      {
+        "node_type": "Slack / Discord",
+        "name": "Notificar seguimiento urgente",
+        "description": "Si el potencial es alto (score >= 4) y quiere seguimiento"
+      }
+    ]
+  },
+  
+  "example_payload": {
+    "diagnostic_id": "diag_1732012345_abc123",
+    "timestamp": "2025-11-18T15:30:00Z",
+    "answers": {
+      "role": "owner",
+      "sector": "ecommerce",
+      "sector_other": "",
+      "company_size": "4_10",
+      "main_channels": ["online_store", "whatsapp"],
+      "communication_tools": ["whatsapp", "email"],
+      "communication_tools_other": "",
+      "internal_tools": ["spreadsheets", "email_whatsapp_only"],
+      "internal_tools_other": "",
+      "customer_data_source": "store",
+      "integration_level": 2,
+      "current_ai_usage": ["text_ai"],
+      "current_ai_usage_other": "",
+      "pain_areas": ["support", "admin_finance"],
+      "key_process_description": "Cuando entra un pedido tenemos que copiar los datos manualmente de la tienda a un Excel, después enviar un email de confirmación, y luego estar pendientes del pago. Si no pagan a tiempo hay que enviar recordatorios uno por uno por WhatsApp. Todo esto consume muchísimo tiempo y a veces se nos olvidan pedidos.",
+      "repetitive_tasks": ["copy_paste", "reminders", "data_entry"],
+      "repetitive_tasks_other": "",
+      "process_owner": "one_person",
+      "process_hours_week": "10_20",
+      "process_problems": ["delays", "errors", "stress", "lost_opportunities"],
+      "process_priority": "max",
+      "magic_wish": "Que todo el tema de facturas, seguimiento de pagos y recordatorios se haga solo sin que tenga que estar encima",
+      "organization_level": 2,
+      "change_willingness": "high",
+      "budget_level": "200_500",
+      "contact_data": {
+        "name": "María González",
+        "company": "Tienda Online Example S.L.",
+        "email": "maria@tiendaexample.com",
+        "website": "https://tiendaexample.com",
+        "phone": "+34123456789"
+      },
+      "contact_preference": "whatsapp",
+      "allow_human_followup": "yes"
+    }
+  },
+  
+  "example_ai_response": {
+    "automation_potential_score": 4,
+    "automation_potential_label": "Potencial alto",
+    "company_profile": "Tienda online de 4-10 personas que recibe pedidos principalmente por web y WhatsApp. Utilizan Excel para gestión interna y tienen bajo nivel de integración entre herramientas (nivel 2/5). Ya usan IA para textos pero no tienen automatización de procesos. Alta disposición al cambio.",
+    "main_pain_points": [
+      "Copia manual de datos entre tienda online y Excel consume 10-20h/semana",
+      "Seguimiento de pagos y envío de recordatorios completamente manual",
+      "Errores frecuentes y pedidos olvidados por falta de sistema centralizado",
+      "Estrés en el equipo y pérdida de oportunidades de venta"
+    ],
+    "priority_areas": [
+      "Automatización de gestión de pedidos y facturación",
+      "Sistema automatizado de seguimiento de pagos y recordatorios",
+      "Centralización de información de clientes"
+    ],
+    "quick_wins": [
+      "Integración directa tienda online → Google Sheets con Zapier/Make (1 semana)",
+      "Recordatorios automáticos de pago por email (2 semanas)",
+      "Plantillas automatizadas de confirmación de pedido (1 semana)"
+    ],
+    "recommended_first_project": "Sistema de automatización de gestión de pedidos y facturación. Conectar la tienda online directamente con Google Sheets (o migrar a un CRM ligero como Airtable), automatizar emails de confirmación, implementar sistema de recordatorios de pago programados por email y WhatsApp, y crear un dashboard simple para seguimiento. Incluye formación del equipo en 2-3 sesiones.",
+    "estimated_time_savings": "12-15 horas semanales (reducción del 60-75% del tiempo actual)",
+    "estimated_roi_timeline": "2-3 meses",
+    "risks_and_constraints": "Nivel de organización bajo (2/5) puede requerir trabajo previo de documentación de procesos. Presupuesto de 200-500€/mes es ajustado pero viable con herramientas low-code. Es clave la formación del equipo para adopción exitosa.",
+    "summary_for_email": "Hola María,\n\nHemos analizado tu caso y vemos un potencial muy alto de automatización en tu tienda online.\n\nEl mayor impacto lo tendríais automatizando la gestión de pedidos y el seguimiento de pagos. Esto podría ahorraros entre 12-15 horas semanales y eliminar los errores y olvidos que ahora os generan estrés y pérdida de ventas.\n\nTe propongo empezar con un proyecto concreto: conectar tu tienda directamente con un sistema centralizado, automatizar confirmaciones y recordatorios de pago. Es algo que podemos tener funcionando en 4-6 semanas y que se paga solo en 2-3 meses.\n\nEn los próximos días te contactaré por WhatsApp (como preferiste) para explicarte el plan completo y resolver dudas.\n\nUn saludo,\nEquipo Weaves",
+    "summary_for_consultant": "PERFIL: Tienda online sector ecommerce, 4-10 personas. Propietaria muy involucrada en operaciones. Problema crítico: gestión manual de pedidos consume 10-20h/semana con errores frecuentes.\n\nOPORTUNIDAD CLARA: Automatización de pedidos + facturación + cobros. Tienen tienda online pero cero integración (nivel 2/5). Todo manual en Excel. Deseo principal es eliminar seguimiento manual de pagos.\n\nRECOMENDACIÓN: Proyecto fase 1 de automatización con Make/n8n conectando tienda → Sheets/Airtable → emails automáticos → recordatorios WhatsApp programados. Quick win inicial con integraciones nativas, después escalar a flujos más complejos.\n\nPERFIL IDEAL: Alta disposición al cambio, prioridad máxima, presupuesto 200-500€/mes (ajustado pero viable), quiere seguimiento humano. Score potencial: 4/5.\n\nACCIÓN: Contactar por WhatsApp esta semana. Proponer llamada discovery de 30min. Si encaja, propuesta de proyecto en 48h."
+  },
+  
+  "email_templates": {
+    "client_diagnostic": {
+      "subject": "Tu diagnóstico de automatización - Weaves",
+      "body_structure": "Saludo personalizado\n\nResumen del análisis (2-3 líneas)\n\nPrincipal oportunidad detectada\n\nImpacto estimado (tiempo ahorrado)\n\nPropuesta de primer proyecto\n\nTimeline y ROI esperado\n\nPróximos pasos\n\nDespedida",
+      "tone": "Profesional cercano, directo, orientado a acción"
+    },
+    "internal_notification": {
+      "subject": "Nuevo diagnóstico: {{company}} - Score {{score}}/5",
+      "body_structure": "Datos de contacto\n\nPerfil de empresa y contexto\n\nProblema principal\n\nOportunidad detectada\n\nRecomendación de proyecto\n\nPerfil de lead (calificación)\n\nAcción recomendada y timing",
+      "tone": "Técnico, conciso, accionable"
+    }
+  }
+}

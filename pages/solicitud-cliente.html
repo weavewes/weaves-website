@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Envía una solicitud de soporte o mejora en menos de dos minutos. Indica tipo de petición, detalle y archivos; nosotros enrutamos el ticket.">
+    <title>Solicitud de soporte (clientes) | Weaves</title>
+
+    <meta property="og:title" content="Solicitud de soporte (clientes) | Weaves">
+    <meta property="og:description" content="Formulario breve para incidencias, nuevas funcionalidades, cambios o consultas. Adjuntos y contexto para el equipo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://weavewp.com/pages/solicitud-cliente.html">
+
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/dc631879d65242ce24a26ab58c89d599/script.js"></script> <!-- End cookieyes banner -->
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <section class="hero-unified">
+        <div class="container">
+            <div class="hero-unified-content">
+                <span class="badge-unified">Clientes</span>
+                <h1>Nueva solicitud</h1>
+                <p class="lead">En pocos campos nos dices qué necesitas; el equipo recibe el contexto listo para actuar. Si vienes desde el área de cliente en WordPress, algunos datos pueden rellenarse solos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-dark">
+        <div class="container">
+            <div class="content-wrapper" style="max-width: 720px; margin: 0 auto;">
+                <form
+                    id="clientRequestForm"
+                    class="contact-form"
+                    data-webhook-url=""
+                    novalidate
+                >
+                    <div class="form-group form-group--proyecto-search">
+                        <label for="proyecto_search_input">Proyecto *</label>
+                        <div class="proyecto-combobox" id="proyecto_combobox">
+                            <div class="proyecto-combobox__field">
+                                <input
+                                    type="text"
+                                    id="proyecto_search_input"
+                                    autocomplete="off"
+                                    placeholder="Busca por nombre de proyecto…"
+                                    aria-autocomplete="list"
+                                    aria-controls="proyecto_search_listbox"
+                                    aria-expanded="false"
+                                    role="combobox"
+                                >
+                                <input type="hidden" name="nombre_proyecto" id="nombre_proyecto_hidden" value="">
+                                <input type="hidden" name="company_name" id="company_name_hidden" value="">
+                                <input type="hidden" name="teable_proyecto_id" id="teable_proyecto_id_hidden" value="">
+                                <input type="hidden" name="proyecto_teable_origen" id="proyecto_teable_origen" value="">
+                            </div>
+                            <ul id="proyecto_search_listbox" class="proyecto-dropdown" role="listbox" hidden aria-label="Proyectos por nombre"></ul>
+                        </div>
+                        <p class="form-hint">La búsqueda usa el <strong>nombre del proyecto</strong> en Teable. Si no aparece en la lista, <a href="contacto.html">contacta con Weaves</a> para registrarlo antes de enviar la solicitud.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="request_type">¿De qué trata la petición? *</label>
+                        <select id="request_type" name="request_type" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="error">Fallo / error (algo se rompió)</option>
+                            <option value="new_feature">Nueva funcionalidad / automatización</option>
+                            <option value="change">Actualización / modificación</option>
+                            <option value="general_requirement">Nuevo requerimiento general</option>
+                            <option value="design_requirements">Requerimientos de diseño</option>
+                            <option value="question">Duda / consulta general</option>
+                        </select>
+                    </div>
+
+                    <div id="error-only-fields" class="form-conditional" hidden>
+                        <div class="form-group">
+                            <label for="error_since">¿Desde cuándo ocurre? (opcional)</label>
+                            <input type="text" id="error_since" name="error_since" placeholder="Ej. desde ayer por la tarde, tras el despliegue…">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Título de la solicitud *</label>
+                        <input type="text" id="title" name="title" required maxlength="200" placeholder="Resume en una frase (ej. error en el webhook de pagos)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Descripción detallada *</label>
+                        <textarea id="description" name="description" rows="7" required maxlength="8000" placeholder="Pasos para reproducir, qué esperabas y qué ocurre…"></textarea>
+                        <p class="form-hint">Si tienes un video de Loom o un enlace que muestre el problema, pégalo aquí. Una captura o un vídeo corto evitan idas y vueltas.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <span id="attachments-field-label" class="form-label-text">Archivos adjuntos (opcional)</span>
+                        <div class="form-file">
+                            <input
+                                type="file"
+                                id="attachments"
+                                name="attachments"
+                                class="form-file-input"
+                                multiple
+                                accept="image/*,.pdf,.doc,.docx,.txt,.zip"
+                                aria-labelledby="attachments-field-label"
+                                aria-describedby="attachments-hint"
+                            >
+                            <label for="attachments" class="form-file-trigger btn btn-secondary">
+                                <svg class="form-file-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                <span>Elegir archivos</span>
+                            </label>
+                        </div>
+                        <p class="form-hint" id="attachments-hint">Capturas o documentos. Máximo 5 archivos, 10 MB cada uno.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="urgency">Nivel de urgencia</label>
+                        <select id="urgency" name="urgency">
+                            <option value="normal">Normal (flujo habitual)</option>
+                            <option value="critical">Crítico</option>
+                        </select>
+                        <p class="form-hint form-hint--warning">Usa <strong>Crítico</strong> solo si el problema detiene la operación del negocio.</p>
+                    </div>
+
+                    <div class="form-group form-group--date">
+                        <label for="fecha_entrega">Fecha de entrega deseada (opcional)</label>
+                        <div class="form-date-field">
+                            <input type="date" id="fecha_entrega" name="fecha_entrega" class="form-date-input" autocomplete="off">
+                        </div>
+                        <p class="form-hint">Si necesitas la entrega para una fecha concreta, indícala aquí.</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">Enviar solicitud</button>
+
+                    <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); text-align: center;">
+                        Los datos de envío (fecha, página de origen) se añaden automáticamente para gestión interna. Si estás logueado en nuestro portal, el ID de cliente puede enviarse vía integración.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <div id="clientRequestFeedbackModal" class="modal-feedback" hidden role="dialog" aria-modal="true" aria-labelledby="modalFeedbackTitle" aria-describedby="modalFeedbackBody">
+        <div class="modal-feedback__backdrop" id="modalFeedbackBackdrop" tabindex="-1" aria-hidden="true"></div>
+        <div class="modal-feedback__panel">
+            <div class="modal-feedback__icon-wrap" aria-hidden="true">
+                <span class="modal-feedback__icon modal-feedback__icon--success" id="modalFeedbackIconSuccess">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </span>
+                <span class="modal-feedback__icon modal-feedback__icon--error" id="modalFeedbackIconError" hidden>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </span>
+            </div>
+            <h2 id="modalFeedbackTitle" class="modal-feedback__title">Mensaje</h2>
+            <p id="modalFeedbackBody" class="modal-feedback__body"></p>
+            <button type="button" class="btn btn-primary modal-feedback__btn" id="modalFeedbackClose">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        // Webhook n8n (producción) — solicitud cliente
+        window.CLIENT_REQUEST_WEBHOOK_URL =
+            window.CLIENT_REQUEST_WEBHOOK_URL ||
+            'https://n8n.weavewp.com/webhook/d22ebdaa-d7a3-4f6b-b320-2e9fb363ebed';
+
+        // Configuración Teable (tu instancia self-hosted)
+        window.TEABLE_CONFIG = {
+            base: 'https://plane.weavewp.com',
+            tableId: 'tblkdYU3GrAdAPHrajt',
+            token: 'teable_accxolRbJeJXIVa8p6H_gtAfqScnuYrgLRJz2LLPiJj3YqRr8x+Ws+/oS7DgOEw=',
+        };
+    </script>
+    <script src="../js/components-loader.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/forms.js"></script>
+    <script src="../js/proyecto-search.js"></script>
+    <script src="../js/client-request-form.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadComponent('header-placeholder', 'header.html');
+            loadComponent('footer-placeholder', 'footer.html');
+        });
+    </script>
+</body>
+</html>

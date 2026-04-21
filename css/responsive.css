@@ -1,0 +1,782 @@
+/* =========================================================
+   RESPONSIVE DESIGN - CREWAI DARK THEME
+   ========================================================= */
+
+/* ===================================
+   TABLET - 992px y menos
+   =================================== */
+@media (max-width: 992px) {
+    :root {
+        --font-h1: 3rem;        /* 48px */
+        --font-h2: 2.25rem;     /* 36px */
+        --font-h3: 1.625rem;    /* 26px */
+    }
+
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero {
+        padding: var(--spacing-lg) var(--spacing-md);
+        min-height: 500px;
+    }
+
+    section {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .benefits-grid,
+    .services-grid,
+    .sectors-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .team-grid,
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===================================
+   MOBILE - 768px y menos
+   =================================== */
+@media (max-width: 768px) {
+    :root {
+        --font-h1: 2.5rem;      /* 40px */
+        --font-h2: 2rem;        /* 32px */
+        --font-h3: 1.5rem;      /* 24px */
+        --font-h4: 1.25rem;     /* 20px */
+        --spacing-lg: 3rem;
+        --spacing-xl: 4rem;
+    }
+
+    .navbar {
+        padding: 1rem 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        background: rgba(11, 11, 11, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        gap: 0;
+        padding: 2rem 0;
+        transition: left var(--transition-base);
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-menu a::after {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        padding: 0.75rem;
+        background: rgba(255, 94, 58, 0.1);
+        border: 1px solid rgba(255, 94, 58, 0.3);
+        border-radius: 8px;
+        z-index: 1001;
+        transition: all 0.3s ease;
+        width: 48px;
+        height: 48px;
+    }
+
+    .menu-toggle:hover {
+        background: rgba(255, 94, 58, 0.2);
+        border-color: rgba(255, 94, 58, 0.5);
+    }
+
+    .menu-toggle span {
+        width: 24px;
+        height: 2.5px;
+        background: var(--primary-color);
+        border-radius: 3px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: block;
+        position: relative;
+    }
+
+    /* Animación a X cuando el menú está activo */
+    .menu-toggle.active span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+    }
+
+    .hero {
+        padding: var(--spacing-md) 1rem;
+        min-height: 400px;
+    }
+
+    /* Fix tech logos on mobile */
+    .tech-logo img {
+        filter: grayscale(100%) invert(1) brightness(1) !important;
+        opacity: 0.9 !important;
+    }
+
+    /* Permitir video en móviles */
+    .hero-video-background iframe {
+        display: block;
+        /* Restaurar centrado correcto heredado de styles.css */
+        left: 50%;
+        width: 100vw; /* Usar viewport width como base */
+        /* Asegurar cobertura con min-dimensions heredadas */
+    }
+
+    /* Eliminar fondo sólido para ver el video */
+    .hero {
+        background: transparent !important;
+    }
+
+    .hero h1 {
+        font-size: var(--font-h1);
+    }
+
+    .hero p {
+        font-size: var(--font-body-m);
+    }
+
+    .hero .btn {
+        display: block;
+        margin: 0.5rem 0;
+        width: 100%;
+    }
+
+    section {
+        padding: var(--spacing-md) 1rem;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .benefits-grid,
+    .services-grid,
+    .sectors-grid,
+    .stats-grid,
+    .services-elegant-grid,
+    .trust-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Stats responsive */
+    .stat-number {
+        font-size: 3.5rem;
+    }
+
+    .stat-unit {
+        font-size: 1.25rem;
+    }
+
+    /* Services elegant responsive */
+    .service-elegant-card {
+        padding: 2rem;
+    }
+
+    .service-number {
+        font-size: 2.5rem;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .team-grid,
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .case-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .blog-filters {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.813rem;
+    }
+
+    .tab-buttons {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tab-btn {
+        padding: 0.75rem 1rem;
+        font-size: var(--font-caption);
+    }
+
+    .modal {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: var(--font-caption);
+    }
+
+    .card,
+    .benefit-card,
+    .service-card,
+    .sector-card {
+        padding: 1.5rem;
+    }
+}
+
+/* ===================================
+   SMALL MOBILE - 480px y menos
+   =================================== */
+@media (max-width: 480px) {
+    :root {
+        --font-h1: 2rem;        /* 32px */
+        --font-h2: 1.75rem;     /* 28px */
+        --font-h3: 1.375rem;    /* 22px */
+        --font-h4: 1.125rem;    /* 18px */
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2.5rem;
+        --spacing-xl: 3rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .navbar {
+        padding: 0.875rem 1rem;
+    }
+
+    .logo {
+        font-size: 1.125rem;
+    }
+
+    .hero {
+        padding: var(--spacing-lg) 1rem;
+        min-height: 350px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .stat-unit {
+        font-size: 1rem;
+    }
+
+    .stat-visual {
+        margin-bottom: 1rem;
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+    }
+
+    .service-icon-elegant {
+        font-size: 2.5rem;
+    }
+
+    .service-number {
+        font-size: 2rem;
+    }
+
+    .section-title-elegant {
+        margin-bottom: 2.5rem;
+    }
+
+    .section-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 1rem;
+    }
+
+    /* Services page small mobile */
+    .service-detailed-card {
+        padding: 1.5rem;
+    }
+
+    .service-detailed-number {
+        font-size: 2.5rem;
+    }
+
+    .service-detailed-icon {
+        font-size: 2.5rem;
+    }
+
+    .service-detailed-footer {
+        flex-direction: column;
+    }
+
+    .service-detailed-footer .btn {
+        width: 100%;
+    }
+
+    .trust-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-card {
+        padding: 1.5rem;
+    }
+
+    /* Services page responsive */
+    .service-detailed-header {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .service-detailed-number {
+        font-size: 3rem;
+    }
+
+    .service-detailed-icon {
+        font-size: 3rem;
+    }
+
+    .service-detailed-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .service-detailed-card {
+        padding: 2rem;
+    }
+
+    .trust-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
+    }
+
+    section {
+        padding: var(--spacing-lg) 1rem;
+    }
+
+    .section-title h2 {
+        font-size: var(--font-h2);
+    }
+
+    .benefits-grid,
+    .services-grid,
+    .sectors-grid {
+        gap: 1rem;
+    }
+
+    .card,
+    .benefit-card,
+    .service-card,
+    .sector-card {
+        padding: 1.25rem;
+    }
+
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.813rem;
+    }
+
+    .pricing-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .pricing-price {
+        font-size: 2.5rem;
+    }
+
+    .team-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .case-image,
+    .blog-image {
+        height: 180px;
+    }
+
+    .blog-content,
+    .case-content {
+        padding: 1.25rem;
+    }
+
+    .modal {
+        width: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
+
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+
+    .cta {
+        padding: var(--spacing-md) 1rem;
+    }
+
+    .badge-group {
+        gap: 0.375rem;
+    }
+
+    .pill {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    /* Testimonials responsive */
+    .testimonial-card {
+        min-width: 300px;
+        max-width: 300px;
+        padding: 2rem 1.5rem;
+    }
+
+    .testimonial-text {
+        font-size: var(--font-body-m);
+    }
+}
+
+/* ===================================
+   LANDSCAPE MODE (Mobile)
+   =================================== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: var(--spacing-md) 1rem;
+    }
+
+    .modal {
+        max-height: 95vh;
+    }
+
+    section {
+        padding: var(--spacing-md) 1rem;
+    }
+}
+
+/* ===================================
+   LARGE DESKTOP - 1400px y más
+   =================================== */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+
+    :root {
+        --font-h1: 4rem;        /* 64px */
+        --font-h2: 3rem;        /* 48px */
+    }
+
+    .hero {
+        min-height: 700px;
+    }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+@media print {
+    * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    header,
+    footer,
+    .btn,
+    .nav-menu,
+    .menu-toggle {
+        display: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+
+    h1 {
+        font-size: 24pt;
+    }
+
+    h2 {
+        font-size: 20pt;
+    }
+
+    h3 {
+        font-size: 16pt;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    .card,
+    .benefit-card,
+    .service-card {
+        border: 1px solid #000 !important;
+        page-break-inside: avoid;
+    }
+}
+
+/* ===================================
+   REDUCED MOTION (Accesibilidad)
+   =================================== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===================================
+   SERVICE DETAIL PAGE RESPONSIVE
+   =================================== */
+@media (max-width: 992px) {
+    .services-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .section-number {
+        font-size: 3rem;
+    }
+
+    .section-header {
+        gap: 1.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .problems-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .before-after {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .method-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-hero {
+        padding: 5rem 0 4rem;
+    }
+
+    .services-hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .hero-features {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+    }
+
+    .service-section {
+        padding: 3rem 0;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .section-number {
+        font-size: 2.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.75rem;
+    }
+
+    .included-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .case-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .tech-tags {
+        justify-content: center;
+    }
+
+    .implementation-case {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .service-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .section-number {
+        font-size: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .method-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .problem-icon,
+    .benefit-icon,
+    .case-icon {
+        font-size: 2rem;
+    }
+
+    .implementation-case {
+        padding: 1.5rem;
+    }
+
+    .implementation-case h3 {
+        font-size: 1.25rem;
+    }
+}
+
+/* ===================================
+   HIGH CONTRAST MODE
+   =================================== */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #666;
+        --text-light: #CCC;
+    }
+
+    .btn-primary {
+        border: 2px solid var(--text-white);
+    }
+
+    .card,
+    .benefit-card,
+    .service-card {
+        border-width: 2px;
+    }
+}
+
+/* ===================================
+   DARK MODE PREFERENCE (ya estamos en dark)
+   =================================== */
+@media (prefers-color-scheme: light) {
+    /* 
+    Opcional: Podrías ofrecer un tema claro si el usuario prefiere light mode
+    Por ahora mantenemos el dark theme
+    */
+}
+
