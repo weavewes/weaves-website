@@ -78,8 +78,24 @@ for (const [id, sector] of Object.entries(data)) {
     `).join('') : '';
     out = out.replace(/id="s-despues"[^>]*>.*?<\/ul>/s, `id="s-despues" style="list-style:none; display:flex; flex-direction:column; gap:16px; padding:0; margin:0;">\n${despuesHtml}\n        </ul>`);
 
-    // Clean up dynamic JS loader script since page is now static
-    out = out.replace('<script src="../js/sector-loader.js"></script>', '');
+    // Clean up dynamic JS loader and replace it with a lightweight UI bootloader
+    const uiBootloader = `
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if(typeof lucide !== 'undefined') { lucide.createIcons(); }
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => obs.observe(el));
+  });
+</script>`;
+    out = out.replace('<script src="../js/sector-loader.js"></script>', uiBootloader);
 
     fs.writeFileSync(path.join(outDir, `${id}.html`), out, 'utf8');
     console.log(`→ Successfully compiled static SSG payload for: ${id}.html`);
