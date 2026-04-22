@@ -1,0 +1,690 @@
+{
+  "ecommerce": {
+    "badge": "<i data-lucide='shopping-cart' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i> Comercio Electrónico y Tiendas Online",
+    "h1": "Automatización e IA para vender más sin saturar al equipo",
+    "lead": "Ayudamos a tiendas online y ecommerce a automatizar atención al cliente, gestión de pedidos, comunicación con clientes y tareas internas, conectando tu web, tus canales de venta y tus herramientas de gestión.",
+    "retos": [
+      {
+        "icon": "<i data-lucide='message-circle' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Consultas repetidas constantes",
+        "desc": "Recibes muchas consultas repetidas sobre pedidos, envíos, cambios y devoluciones."
+      },
+      {
+        "icon": "<i data-lucide='smartphone' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Múltiples canales a la vez",
+        "desc": "Atiendes por varios canales a la vez: web, WhatsApp, redes sociales, email."
+      },
+      {
+        "icon": "<i data-lucide='pen-tool' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Actualización manual de pedidos",
+        "desc": "Actualizas estados de pedidos, stock o incidencias de forma manual."
+      },
+      {
+        "icon": "<i data-lucide='shopping-cart' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Carritos abandonados sin seguimiento",
+        "desc": "Tienes carritos abandonados sin un seguimiento sistemático."
+      },
+      {
+        "icon": "<i data-lucide='megaphone' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Dificultad con campañas",
+        "desc": "Te cuesta mantener campañas y contenido de forma constante."
+      },
+      {
+        "icon": "<i data-lucide='folder' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Información dispersa",
+        "desc": "La información está dispersa entre tienda, pasarela de pago, hojas de cálculo y, a veces, un CRM."
+      }
+    ],
+    "soluciones": [
+      {
+        "title": "Automatización de atención al cliente",
+        "desc": "Chatbots en web y WhatsApp que responden consultas sobre pedidos, envíos, pagos y políticas de devolución. Atención 24/7."
+      },
+      {
+        "title": "Flujos de seguimiento post-compra y fidelización",
+        "desc": "Mensajes automáticos de confirmación, seguimiento, agradecimiento y solicitud de reseñas. Comunicación de ofertas personalizadas."
+      },
+      {
+        "title": "Automatización de carritos abandonados",
+        "desc": "Identificación y recuperación automática de carritos abandonados con recordatorios personalizados e incentivos."
+      },
+      {
+        "title": "Integraciones entre sistemas",
+        "desc": "Conexión entre tienda online, CRM, email marketing y herramientas internas. Datos sincronizados y segmentación automática."
+      },
+      {
+        "title": "Automatización administrativa",
+        "desc": "Reportes de ventas periódicos, exportaciones organizadas para contabilidad y avisos internos automáticos."
+      }
+    ],
+    "casos": [
+      {
+        "icon": "<i data-lucide='bot' style='width:20px;height:20px;display:inline-block;vertical-align:middle;stroke:white'></i>",
+        "title": "Atención al cliente automatizada",
+        "desc": "Chatbots que responden automáticamente a:",
+        "list": [
+          "Estado del pedido",
+          "Plazos de entrega",
+          "Métodos de pago",
+          "Políticas de cambio y devolución"
+        ]
+      },
+      {
+        "icon": "<i data-lucide='package' style='width:20px;height:20px;display:inline-block;vertical-align:middle;stroke:white'></i>",
+        "title": "Seguimiento post-compra y fidelización",
+        "desc": "Comunicación automática en cada etapa:",
+        "list": [
+          "Envío de mensajes de confirmación, seguimiento y agradecimiento",
+          "Solicitud automatizada de reseñas",
+          "Comunicación de ofertas o productos relacionados"
+        ]
+      },
+      {
+        "icon": "<i data-lucide='shopping-cart' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Carritos abandonados",
+        "desc": "Recupera ventas perdidas automáticamente:",
+        "list": [
+          "Identificación de carritos abandonados",
+          "Envío de recordatorios y mensajes personalizados",
+          "Opcionalmente, incentivos o promociones"
+        ]
+      },
+      {
+        "icon": "<i data-lucide='refresh-cw' style='width:20px;height:20px;display:inline-block;vertical-align:middle;stroke:white'></i>",
+        "title": "Sincronización de datos",
+        "desc": "Conecta todos tus sistemas:",
+        "list": [
+          "Conexión entre tienda y CRM",
+          "Segmentación automática según comportamiento de compra",
+          "Integración con email marketing y sistemas internos"
+        ]
+      }
+    ],
+    "beneficios": [
+      "Reducción de carga en atención al cliente. Tu equipo responde solo lo importante.",
+      "Respuestas más rápidas y consistentes. Tus clientes reciben información al instante, 24/7.",
+      "Mayor recuperación de ventas gracias a carritos abandonados y seguimiento automatizado.",
+      "Datos de clientes y pedidos más ordenados y accesibles. Toda la información centralizada.",
+      "Menos errores y más claridad sobre el rendimiento del negocio con reportes automáticos."
+    ],
+    "antes": [
+      "Soporte saturado respondiendo siempre lo mismo",
+      "Carritos abandonados sin seguimiento claro",
+      "Datos dispersos entre varias herramientas",
+      "Reportes manuales \"cuando hay tiempo\"",
+      "Sensación constante de ir apagando fuegos"
+    ],
+    "despues": [
+      "Soporte más ligero y organizado",
+      "Seguimiento automático de carritos y post-compra",
+      "Información centralizada y conectada",
+      "Reportes periódicos generados automáticamente",
+      "Más tiempo para estrategia, producto y crecimiento"
+    ],
+    "tech": [
+      "WooCommerce",
+      "Shopify",
+      "PrestaShop",
+      "Email marketing",
+      "Chatwoot",
+      "CRMs ligeros",
+      "n8n",
+      "WhatsApp Business",
+      "Hojas de cálculo",
+      "Sistemas contables"
+    ]
+  },
+  "educacion": {
+    "badge": "<i data-lucide='graduation-cap' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i> Educación, Academias y Formación",
+    "h1": "Más orden en alumnos, pagos y comunicación, menos carga administrativa",
+    "lead": "Ayudamos a academias, centros educativos y proyectos de formación a automatizar la gestión de alumnos, pagos, inscripciones y comunicación, para que el equipo pueda centrarse en enseñar.",
+    "retos": [
+      {
+        "icon": "<i data-lucide='clipboard-list' style='width:24px;height:24px;display:inline-block;vertical-align:middle;margin-right:8px;stroke:var(--teal)'></i>",
+        "title": "Gestión manual de inscripciones",
+        "desc": "Gestión manual de inscripciones, matrículas y listas de alumnos."
+      },
+      {
+        "icon": "<i data-lucide='credit-card' style='width:24px;height:24px;display:inline-block;vertical-align:middle;margin-right:8px;stroke:var(--teal)'></i>",
+        "title": "Control de pagos en hojas de cálculo",
+        "desc": "Pagos y renovaciones controlados a mano o con hojas de cálculo."
+      },
+      {
+        "icon": "<i data-lucide='smartphone' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Comunicación fragmentada",
+        "desc": "Comunicación constante con alumnos y familias por múltiples canales."
+      },
+      {
+        "icon": "<i data-lucide='clock' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Recordatorios manuales",
+        "desc": "Envío manual de recordatorios, cambios de horario, avisos y materiales."
+      },
+      {
+        "icon": "<i data-lucide='bar-chart-2' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Falta de visibilidad",
+        "desc": "Dificultad para tener una visión clara de quién está al día, quién renueva y quién no."
+      }
+    ],
+    "soluciones": [
+      {
+        "title": "Automatización de inscripciones y procesos de alta",
+        "desc": "Formularios conectados a bases de datos o CRM con confirmaciones automáticas y flujos internos para gestionar solicitudes."
+      },
+      {
+        "title": "Recordatorios de pagos, renovaciones y documentación",
+        "desc": "Sistema automático de recordatorios de pagos, vencimientos y documentación pendiente con registro centralizado."
+      },
+      {
+        "title": "Comunicación estructurada con alumnos y familias",
+        "desc": "Envío automatizado de avisos, cambios de horario, materiales y recordatorios segmentados por grupo o curso."
+      },
+      {
+        "title": "Integración entre sistemas",
+        "desc": "Integración entre web, formularios, sistemas de pago y bases de datos para mantener todo sincronizado."
+      },
+      {
+        "title": "Automatización de envíos recurrentes",
+        "desc": "Automatización de envío de materiales, certificados y comunicaciones recurrentes programadas."
+      }
+    ],
+    "casos": [
+      {
+        "icon": "<i data-lucide='clipboard-list' style='width:24px;height:24px;display:inline-block;vertical-align:middle;margin-right:8px;stroke:var(--teal)'></i>",
+        "title": "Inscripciones y admisiones",
+        "desc": "Automatiza el proceso completo de inscripción:",
+        "list": [
+          "Formularios conectados a una base de datos o CRM",
+          "Confirmaciones automáticas por email o WhatsApp",
+          "Flujos internos para revisar y aceptar solicitudes"
+        ]
+      },
+      {
+        "icon": "<i data-lucide='credit-card' style='width:24px;height:24px;display:inline-block;vertical-align:middle;margin-right:8px;stroke:var(--teal)'></i>",
+        "title": "Pagos y renovaciones",
+        "desc": "Control automático del estado financiero:",
+        "list": [
+          "Recordatorios automatizados de pagos y vencimientos",
+          "Avisos internos cuando hay impagos o casos especiales",
+          "Registro automático de estados en una hoja o sistema central"
+        ]
+      }
+    ],
+    "beneficios": [
+      "Menos carga administrativa en inscripciones y pagos.",
+      "Menos riesgo de olvidos o errores en la comunicación con familias.",
+      "Mayor satisfacción de alumnos y familias por la claridad de información.",
+      "Más tiempo disponible para docencia, mejora pedagógica y atención real."
+    ],
+    "antes": [
+      "Inscripciones gestionadas a mano",
+      "Comunicación fragmentada y reactiva",
+      "Control de pagos poco claro",
+      "Mucho tiempo invertido en tareas repetitivas",
+      "Sensación de desorden en momentos de alta demanda"
+    ],
+    "despues": [
+      "Inscripciones y comunicaciones más ordenadas",
+      "Recordatorios y avisos automatizados",
+      "Mejor seguimiento de la situación de cada alumno",
+      "Más foco en lo educativo y menos en la administración"
+    ],
+    "tech": [
+      "Formularios web",
+      "Plataformas de pago",
+      "Hojas de cálculo",
+      "CRM sencillo",
+      "Herramientas de mailing",
+      "WhatsApp Business",
+      "n8n",
+      "Plataformas educativas (LMS)"
+    ]
+  },
+  "restauracion-turismo": {
+    "badge": "Servicios Profesionales y Consultoras",
+    "h1": "Más orden, menos carga operativa, sin crecer en estructura",
+    "lead": "Ayudamos a despachos, asesorías, agencias, estudios y empresas de servicios a reducir tareas repetitivas, ordenar procesos y mejorar la experiencia de cliente, sin necesidad de ampliar equipo.",
+    "retos": [
+      {
+        "icon": "<i data-lucide='mail' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Caos administrativo",
+        "desc": "Mucho trabajo administrativo y de coordinación. Dependencia fuerte de email, WhatsApp y hojas de cálculo."
+      },
+      {
+        "icon": "<i data-lucide='folder' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Información dispersa",
+        "desc": "Información de clientes, expedientes o proyectos dispersa en varios sitios sin un sistema centralizado."
+      },
+      {
+        "icon": "<i data-lucide='help-circle' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Procesos no estandarizados",
+        "desc": "Procesos poco documentados o no estandarizados que dependen de la memoria de cada persona."
+      },
+      {
+        "icon": "<i data-lucide='search' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Seguimiento desordenado",
+        "desc": "Dificultad para hacer seguimiento ordenado de clientes, ventas y estado de proyectos."
+      },
+      {
+        "icon": "<i data-lucide='clock' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Poco tiempo de valor",
+        "desc": "Poco tiempo para tareas de valor como consultoría, creación, estrategia y atención al cliente."
+      },
+      {
+        "icon": "<i data-lucide='frown' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Sensación de descontrol",
+        "desc": "Sensación constante de ir \"un paso por detrás\" sin visibilidad clara del estado de cada caso."
+      }
+    ],
+    "soluciones": [
+      {
+        "title": "Automatización de flujos de entrada",
+        "desc": "Automatización de flujos de entrada de clientes: leads, solicitudes, consultas. Todo organizado y registrado automáticamente."
+      },
+      {
+        "title": "Organización de procesos internos",
+        "desc": "Organización y automatización de procesos internos: tareas, estados, avisos. Seguimiento claro de cada expediente."
+      },
+      {
+        "title": "Integración de herramientas",
+        "desc": "Integración de email, formularios, WhatsApp y CRM. Todos tus canales conectados en un solo flujo."
+      },
+      {
+        "title": "Recordatorios automáticos",
+        "desc": "Recordatorios de pagos, renovaciones, citas o hitos de proyecto. Nunca más olvides un seguimiento importante."
+      },
+      {
+        "title": "Comunicaciones automatizadas",
+        "desc": "Automatización de comunicaciones repetitivas con clientes. Mantén informados a tus clientes sin esfuerzo manual."
+      }
+    ],
+    "casos": [
+      {
+        "icon": "<i data-lucide='target' style='width:20px;height:20px;display:inline-block;vertical-align:middle;stroke:white'></i>",
+        "title": "Captación y cualificación de clientes",
+        "desc": "Automatiza todo el proceso desde el primer contacto hasta la conversión:",
+        "list": [
+          "Formularios y flujos que recogen la información clave",
+          "Registro automático en CRM y asignación interna",
+          "Mensajes de confirmación y seguimiento inicial"
+        ]
+      },
+      {
+        "icon": "<i data-lucide='bar-chart-2' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Gestión de proyectos o expedientes",
+        "desc": "Mantén el control completo del estado de cada caso:",
+        "list": [
+          "Cambios de estado automatizados según hitos",
+          "Notificaciones internas cuando toca actuar",
+          "Generación de reportes básicos de avance"
+        ]
+      }
+    ],
+    "beneficios": [
+      "Menos tiempo perdido en tareas administrativas y más enfoque en el trabajo de alto valor.",
+      "Procesos más claros y repetibles que no dependen de la memoria de una persona.",
+      "Mejor experiencia para el cliente: se le informa a tiempo y con claridad en cada etapa.",
+      "Mayor visibilidad del estado de cada caso, expediente o proyecto en tiempo real.",
+      "Mayor capacidad de escalar sin bloquear al equipo ni necesidad de ampliar estructura."
+    ],
+    "antes": [
+      "Clientes entrando por muchos canales sin orden",
+      "Tareas administrativas constantes y repetitivas",
+      "Falta de visibilidad del estado de cada caso",
+      "Dependencia de la memoria o de hojas de cálculo",
+      "Sensación de ir siempre \"un paso por detrás\""
+    ],
+    "despues": [
+      "Entradas unificadas y flujos claros",
+      "Automatización de recordatorios y comunicaciones",
+      "Seguimiento más ordenado de cada cliente o proyecto",
+      "Menos carga mental y más control",
+      "Más tiempo para el trabajo de alto valor"
+    ],
+    "tech": [
+      "CRM ligeros",
+      "Gestores de tareas",
+      "Correo electrónico",
+      "Formularios web",
+      "WhatsApp Business",
+      "n8n",
+      "Herramientas de firma",
+      "Facturación"
+    ]
+  },
+  "salud": {
+    "badge": "Servicios Profesionales y Consultoras",
+    "h1": "Más orden, menos carga operativa, sin crecer en estructura",
+    "lead": "Ayudamos a despachos, asesorías, agencias, estudios y empresas de servicios a reducir tareas repetitivas, ordenar procesos y mejorar la experiencia de cliente, sin necesidad de ampliar equipo.",
+    "retos": [
+      {
+        "icon": "<i data-lucide='mail' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Caos administrativo",
+        "desc": "Mucho trabajo administrativo y de coordinación. Dependencia fuerte de email, WhatsApp y hojas de cálculo."
+      },
+      {
+        "icon": "<i data-lucide='folder' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Información dispersa",
+        "desc": "Información de clientes, expedientes o proyectos dispersa en varios sitios sin un sistema centralizado."
+      },
+      {
+        "icon": "<i data-lucide='help-circle' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Procesos no estandarizados",
+        "desc": "Procesos poco documentados o no estandarizados que dependen de la memoria de cada persona."
+      },
+      {
+        "icon": "<i data-lucide='search' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Seguimiento desordenado",
+        "desc": "Dificultad para hacer seguimiento ordenado de clientes, ventas y estado de proyectos."
+      },
+      {
+        "icon": "<i data-lucide='clock' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Poco tiempo de valor",
+        "desc": "Poco tiempo para tareas de valor como consultoría, creación, estrategia y atención al cliente."
+      },
+      {
+        "icon": "<i data-lucide='frown' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Sensación de descontrol",
+        "desc": "Sensación constante de ir \"un paso por detrás\" sin visibilidad clara del estado de cada caso."
+      }
+    ],
+    "soluciones": [
+      {
+        "title": "Automatización de flujos de entrada",
+        "desc": "Automatización de flujos de entrada de clientes: leads, solicitudes, consultas. Todo organizado y registrado automáticamente."
+      },
+      {
+        "title": "Organización de procesos internos",
+        "desc": "Organización y automatización de procesos internos: tareas, estados, avisos. Seguimiento claro de cada expediente."
+      },
+      {
+        "title": "Integración de herramientas",
+        "desc": "Integración de email, formularios, WhatsApp y CRM. Todos tus canales conectados en un solo flujo."
+      },
+      {
+        "title": "Recordatorios automáticos",
+        "desc": "Recordatorios de pagos, renovaciones, citas o hitos de proyecto. Nunca más olvides un seguimiento importante."
+      },
+      {
+        "title": "Comunicaciones automatizadas",
+        "desc": "Automatización de comunicaciones repetitivas con clientes. Mantén informados a tus clientes sin esfuerzo manual."
+      }
+    ],
+    "casos": [
+      {
+        "icon": "<i data-lucide='target' style='width:20px;height:20px;display:inline-block;vertical-align:middle;stroke:white'></i>",
+        "title": "Captación y cualificación de clientes",
+        "desc": "Automatiza todo el proceso desde el primer contacto hasta la conversión:",
+        "list": [
+          "Formularios y flujos que recogen la información clave",
+          "Registro automático en CRM y asignación interna",
+          "Mensajes de confirmación y seguimiento inicial"
+        ]
+      },
+      {
+        "icon": "<i data-lucide='bar-chart-2' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Gestión de proyectos o expedientes",
+        "desc": "Mantén el control completo del estado de cada caso:",
+        "list": [
+          "Cambios de estado automatizados según hitos",
+          "Notificaciones internas cuando toca actuar",
+          "Generación de reportes básicos de avance"
+        ]
+      }
+    ],
+    "beneficios": [
+      "Menos tiempo perdido en tareas administrativas y más enfoque en el trabajo de alto valor.",
+      "Procesos más claros y repetibles que no dependen de la memoria de una persona.",
+      "Mejor experiencia para el cliente: se le informa a tiempo y con claridad en cada etapa.",
+      "Mayor visibilidad del estado de cada caso, expediente o proyecto en tiempo real.",
+      "Mayor capacidad de escalar sin bloquear al equipo ni necesidad de ampliar estructura."
+    ],
+    "antes": [
+      "Clientes entrando por muchos canales sin orden",
+      "Tareas administrativas constantes y repetitivas",
+      "Falta de visibilidad del estado de cada caso",
+      "Dependencia de la memoria o de hojas de cálculo",
+      "Sensación de ir siempre \"un paso por detrás\""
+    ],
+    "despues": [
+      "Entradas unificadas y flujos claros",
+      "Automatización de recordatorios y comunicaciones",
+      "Seguimiento más ordenado de cada cliente o proyecto",
+      "Menos carga mental y más control",
+      "Más tiempo para el trabajo de alto valor"
+    ],
+    "tech": [
+      "CRM ligeros",
+      "Gestores de tareas",
+      "Correo electrónico",
+      "Formularios web",
+      "WhatsApp Business",
+      "n8n",
+      "Herramientas de firma",
+      "Facturación"
+    ]
+  },
+  "servicios-profesionales": {
+    "badge": "Servicios Profesionales y Consultoras",
+    "h1": "Más orden, menos carga operativa, sin crecer en estructura",
+    "lead": "Ayudamos a despachos, asesorías, agencias, estudios y empresas de servicios a reducir tareas repetitivas, ordenar procesos y mejorar la experiencia de cliente, sin necesidad de ampliar equipo.",
+    "retos": [
+      {
+        "icon": "<i data-lucide='mail' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Caos administrativo",
+        "desc": "Mucho trabajo administrativo y de coordinación. Dependencia fuerte de email, WhatsApp y hojas de cálculo."
+      },
+      {
+        "icon": "<i data-lucide='folder' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Información dispersa",
+        "desc": "Información de clientes, expedientes o proyectos dispersa en varios sitios sin un sistema centralizado."
+      },
+      {
+        "icon": "<i data-lucide='help-circle' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Procesos no estandarizados",
+        "desc": "Procesos poco documentados o no estandarizados que dependen de la memoria de cada persona."
+      },
+      {
+        "icon": "<i data-lucide='search' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Seguimiento desordenado",
+        "desc": "Dificultad para hacer seguimiento ordenado de clientes, ventas y estado de proyectos."
+      },
+      {
+        "icon": "<i data-lucide='clock' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Poco tiempo de valor",
+        "desc": "Poco tiempo para tareas de valor como consultoría, creación, estrategia y atención al cliente."
+      },
+      {
+        "icon": "<i data-lucide='frown' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Sensación de descontrol",
+        "desc": "Sensación constante de ir \"un paso por detrás\" sin visibilidad clara del estado de cada caso."
+      }
+    ],
+    "soluciones": [
+      {
+        "title": "Automatización de flujos de entrada",
+        "desc": "Automatización de flujos de entrada de clientes: leads, solicitudes, consultas. Todo organizado y registrado automáticamente."
+      },
+      {
+        "title": "Organización de procesos internos",
+        "desc": "Organización y automatización de procesos internos: tareas, estados, avisos. Seguimiento claro de cada expediente."
+      },
+      {
+        "title": "Integración de herramientas",
+        "desc": "Integración de email, formularios, WhatsApp y CRM. Todos tus canales conectados en un solo flujo."
+      },
+      {
+        "title": "Recordatorios automáticos",
+        "desc": "Recordatorios de pagos, renovaciones, citas o hitos de proyecto. Nunca más olvides un seguimiento importante."
+      },
+      {
+        "title": "Comunicaciones automatizadas",
+        "desc": "Automatización de comunicaciones repetitivas con clientes. Mantén informados a tus clientes sin esfuerzo manual."
+      }
+    ],
+    "casos": [
+      {
+        "icon": "<i data-lucide='target' style='width:20px;height:20px;display:inline-block;vertical-align:middle;stroke:white'></i>",
+        "title": "Captación y cualificación de clientes",
+        "desc": "Automatiza todo el proceso desde el primer contacto hasta la conversión:",
+        "list": [
+          "Formularios y flujos que recogen la información clave",
+          "Registro automático en CRM y asignación interna",
+          "Mensajes de confirmación y seguimiento inicial"
+        ]
+      },
+      {
+        "icon": "<i data-lucide='bar-chart-2' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Gestión de proyectos o expedientes",
+        "desc": "Mantén el control completo del estado de cada caso:",
+        "list": [
+          "Cambios de estado automatizados según hitos",
+          "Notificaciones internas cuando toca actuar",
+          "Generación de reportes básicos de avance"
+        ]
+      }
+    ],
+    "beneficios": [
+      "Menos tiempo perdido en tareas administrativas y más enfoque en el trabajo de alto valor.",
+      "Procesos más claros y repetibles que no dependen de la memoria de una persona.",
+      "Mejor experiencia para el cliente: se le informa a tiempo y con claridad en cada etapa.",
+      "Mayor visibilidad del estado de cada caso, expediente o proyecto en tiempo real.",
+      "Mayor capacidad de escalar sin bloquear al equipo ni necesidad de ampliar estructura."
+    ],
+    "antes": [
+      "Clientes entrando por muchos canales sin orden",
+      "Tareas administrativas constantes y repetitivas",
+      "Falta de visibilidad del estado de cada caso",
+      "Dependencia de la memoria o de hojas de cálculo",
+      "Sensación de ir siempre \"un paso por detrás\""
+    ],
+    "despues": [
+      "Entradas unificadas y flujos claros",
+      "Automatización de recordatorios y comunicaciones",
+      "Seguimiento más ordenado de cada cliente o proyecto",
+      "Menos carga mental y más control",
+      "Más tiempo para el trabajo de alto valor"
+    ],
+    "tech": [
+      "CRM ligeros",
+      "Gestores de tareas",
+      "Correo electrónico",
+      "Formularios web",
+      "WhatsApp Business",
+      "n8n",
+      "Herramientas de firma",
+      "Facturación"
+    ]
+  },
+  "startups": {
+    "badge": "Servicios Profesionales y Consultoras",
+    "h1": "Más orden, menos carga operativa, sin crecer en estructura",
+    "lead": "Ayudamos a despachos, asesorías, agencias, estudios y empresas de servicios a reducir tareas repetitivas, ordenar procesos y mejorar la experiencia de cliente, sin necesidad de ampliar equipo.",
+    "retos": [
+      {
+        "icon": "<i data-lucide='mail' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Caos administrativo",
+        "desc": "Mucho trabajo administrativo y de coordinación. Dependencia fuerte de email, WhatsApp y hojas de cálculo."
+      },
+      {
+        "icon": "<i data-lucide='folder' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Información dispersa",
+        "desc": "Información de clientes, expedientes o proyectos dispersa en varios sitios sin un sistema centralizado."
+      },
+      {
+        "icon": "<i data-lucide='help-circle' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Procesos no estandarizados",
+        "desc": "Procesos poco documentados o no estandarizados que dependen de la memoria de cada persona."
+      },
+      {
+        "icon": "<i data-lucide='search' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Seguimiento desordenado",
+        "desc": "Dificultad para hacer seguimiento ordenado de clientes, ventas y estado de proyectos."
+      },
+      {
+        "icon": "<i data-lucide='clock' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Poco tiempo de valor",
+        "desc": "Poco tiempo para tareas de valor como consultoría, creación, estrategia y atención al cliente."
+      },
+      {
+        "icon": "<i data-lucide='frown' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Sensación de descontrol",
+        "desc": "Sensación constante de ir \"un paso por detrás\" sin visibilidad clara del estado de cada caso."
+      }
+    ],
+    "soluciones": [
+      {
+        "title": "Automatización de flujos de entrada",
+        "desc": "Automatización de flujos de entrada de clientes: leads, solicitudes, consultas. Todo organizado y registrado automáticamente."
+      },
+      {
+        "title": "Organización de procesos internos",
+        "desc": "Organización y automatización de procesos internos: tareas, estados, avisos. Seguimiento claro de cada expediente."
+      },
+      {
+        "title": "Integración de herramientas",
+        "desc": "Integración de email, formularios, WhatsApp y CRM. Todos tus canales conectados en un solo flujo."
+      },
+      {
+        "title": "Recordatorios automáticos",
+        "desc": "Recordatorios de pagos, renovaciones, citas o hitos de proyecto. Nunca más olvides un seguimiento importante."
+      },
+      {
+        "title": "Comunicaciones automatizadas",
+        "desc": "Automatización de comunicaciones repetitivas con clientes. Mantén informados a tus clientes sin esfuerzo manual."
+      }
+    ],
+    "casos": [
+      {
+        "icon": "<i data-lucide='target' style='width:20px;height:20px;display:inline-block;vertical-align:middle;stroke:white'></i>",
+        "title": "Captación y cualificación de clientes",
+        "desc": "Automatiza todo el proceso desde el primer contacto hasta la conversión:",
+        "list": [
+          "Formularios y flujos que recogen la información clave",
+          "Registro automático en CRM y asignación interna",
+          "Mensajes de confirmación y seguimiento inicial"
+        ]
+      },
+      {
+        "icon": "<i data-lucide='bar-chart-2' style='width:24px;height:24px;display:inline-block;vertical-align:middle;stroke:var(--teal)'></i>",
+        "title": "Gestión de proyectos o expedientes",
+        "desc": "Mantén el control completo del estado de cada caso:",
+        "list": [
+          "Cambios de estado automatizados según hitos",
+          "Notificaciones internas cuando toca actuar",
+          "Generación de reportes básicos de avance"
+        ]
+      }
+    ],
+    "beneficios": [
+      "Menos tiempo perdido en tareas administrativas y más enfoque en el trabajo de alto valor.",
+      "Procesos más claros y repetibles que no dependen de la memoria de una persona.",
+      "Mejor experiencia para el cliente: se le informa a tiempo y con claridad en cada etapa.",
+      "Mayor visibilidad del estado de cada caso, expediente o proyecto en tiempo real.",
+      "Mayor capacidad de escalar sin bloquear al equipo ni necesidad de ampliar estructura."
+    ],
+    "antes": [
+      "Clientes entrando por muchos canales sin orden",
+      "Tareas administrativas constantes y repetitivas",
+      "Falta de visibilidad del estado de cada caso",
+      "Dependencia de la memoria o de hojas de cálculo",
+      "Sensación de ir siempre \"un paso por detrás\""
+    ],
+    "despues": [
+      "Entradas unificadas y flujos claros",
+      "Automatización de recordatorios y comunicaciones",
+      "Seguimiento más ordenado de cada cliente o proyecto",
+      "Menos carga mental y más control",
+      "Más tiempo para el trabajo de alto valor"
+    ],
+    "tech": [
+      "CRM ligeros",
+      "Gestores de tareas",
+      "Correo electrónico",
+      "Formularios web",
+      "WhatsApp Business",
+      "n8n",
+      "Herramientas de firma",
+      "Facturación"
+    ]
+  }
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Gratuito - IA y Automatización | Weaves</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/diagnostic-chat.css">
+
+<style>
+/* Adjust specific animations if necessary, relying mostly on styles.css */
+#diagnostic-modal { backdrop-filter: blur(8px); }
+</style>
+<!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/dc631879d65242ce24a26ab58c89d599/script.js"></script> <!-- End cookieyes banner -->
+</head>
+<body>
+<div id="header-placeholder"></div>
+
+<!-- HERO DIAGNOSTICO -->
+<section class="hero" style="min-height: 85vh; padding-top: 140px; justify-content: center; text-align: center;">
+  <div class="hero-bg"></div>
+  <div class="hero-content" style="max-width: 900px;">
+    <div class="section-eyebrow reveal" style="justify-content: center;">Asesoría Digital</div>
+    <h1 class="hero-title reveal" style="max-width: 100%; font-size: clamp(40px, 6vw, 76px); margin-bottom: 24px;">¿Cuánto puedes automatizar<br><em>en tu empresa?</em></h1>
+    <p class="hero-sub reveal reveal-delay-1" style="max-width: 700px; margin: 0 auto 40px auto; font-size: 18px;">Un diagnóstico mixto (IA + Cerebro Humano) que revisa tus flujos operativos actuales y detecta puntos ciegos de ineficiencia.</p>
+    
+    <div class="reveal reveal-delay-2">
+      <button class="btn-hero-primary" onclick="startDiagnostic()" style="padding: 18px 36px; font-size: 16px; margin-bottom: 16px;">
+        Empezar diagnóstico interactivo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px; margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <div style="color: var(--muted); font-size: 13px; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" style="width: 16px;"><polyline points="20 6 9 17 4 12"/></svg>
+        Gratuito · Informe accionable en 48 hrs.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIEN -->
+<section class="results-section" style="padding-top: 100px;">
+  <div class="results-inner">
+    <div class="results-header" style="justify-content: center; text-align: center; grid-template-columns: 1fr;">
+      <div>
+        <div class="section-eyebrow reveal">El Target Geometral</div>
+        <h2 class="section-title reveal" style="max-width: none; margin: 0 auto;">¿Para quién es<br><em>este análisis?</em></h2>
+      </div>
+    </div>
+    
+    <div class="results-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="result-cell reveal">
+        <div class="result-label" style="font-size: 20px; color: var(--indigo); font-weight: 600; margin-bottom: 16px;">El Cuello de Botella ⌛</div>
+        <div class="result-desc">Empresas que escalan pero el volumen operativo asfixia a sus empleados, destinando horas al data entry y tareas nulas.</div>
+      </div>
+      <div class="result-cell reveal reveal-delay-1">
+        <div class="result-label" style="font-size: 20px; color: var(--indigo); font-weight: 600; margin-bottom: 16px;">Caos de Software 🧩</div>
+        <div class="result-desc">Negocios que han contratado 5 apps distintas (CRM, Facturador, Email) pero que no se hablan de forma automática.</div>
+      </div>
+      <div class="result-cell reveal reveal-delay-2">
+        <div class="result-label" style="font-size: 20px; color: var(--indigo); font-weight: 600; margin-bottom: 16px;">Curiosidad Ejecutiva 🤖</div>
+        <div class="result-desc">Directivos pragmáticos que saben de IA, pero quieren saber exactamente dondé encaja para tener un ROI positivo rápido.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="feature-section dark reversed" style="padding: 120px 0;">
+  <div class="feature-inner">
+    <div class="feature-visual reveal" style="background: transparent; border: none;">
+      <div class="workflow" style="box-shadow: none; border: 1px solid rgba(255,255,255,0.1);">
+         <div class="wf-node">
+            <div class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <div class="wf-node-title">Chatbot Diagnóstico</div>
+         </div>
+         <div class="wf-node amber">
+            <div class="wf-node-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="wf-node-title">Motor de Inferencia AI</div>
+         </div>
+         <div class="wf-node" style="grid-column: span 2; background: rgba(0,180,166,0.2); border-color: rgba(0,180,166,0.5);">
+            <div class="wf-node-icon" style="background: var(--teal);"><svg viewBox="0 0 24 24" fill="none"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M20 12v-4H6a2 2 0 00-2 2v10a2 2 0 002 2h14v-4"/><path d="M18 12a2 2 0 000 4h4v-4z" stroke="white"/></svg></div>
+            <div class="wf-node-title" style="color: white;">Auditoría Experta Humana</div>
+         </div>
+         <div class="wf-node" style="grid-column: span 2;">
+            <div class="wf-node-title">Entrega de Roadmap Estratégico</div>
+         </div>
+      </div>
+    </div>
+    
+    <div class="feature-text">
+       <div class="section-eyebrow reveal">Cómo Funciona</div>
+       <h2 class="section-title reveal">Fricción Cero<br><em>Análisis Profundo.</em></h2>
+       <p class="section-sub reveal reveal-delay-1">Combinamos lo mejor de ambos mundos: la capacidad de ingesta rápida de IA con el olfato técnico del consultor para darte respuestas serias.</p>
+       <ul class="feature-checks reveal reveal-delay-2">
+         <li class="feature-check">1. Conversación amigable con el Agente para recolectar tu input</li>
+         <li class="feature-check">2. La IA preprocesa y detecta gaps masivos</li>
+         <li class="feature-check">3. El Ingeniero de Weaves revisa viabilidad técnica</li>
+         <li class="feature-check">4. Te contactamos con el Roadmap y esfuerzo estimado</li>
+       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ VAS A RECIBIR -->
+<section class="tech-section" style="padding: 100px 0;">
+  <div class="tech-header" style="justify-content: center; text-align: center; max-width: 100%;">
+    <div>
+       <div class="section-eyebrow reveal" style="justify-content: center;">Entregables</div>
+       <h2 class="section-title reveal" style="margin: 0 auto;">El Return on Time<br><em>de 15 minutos de charla.</em></h2>
+    </div>
+  </div>
+  <div class="tech-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 40px auto 0;">
+     <div class="tech-cell reveal" style="padding: 32px; align-items: flex-start; justify-content: flex-start; gap: 16px;">
+        <div style="font-size: 24px;">📊</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; color: var(--indigo);">Mapa de Oportunidades</div>
+        <div style="font-size: 14px; color: var(--muted); line-height: 1.6;">Procesos priorizados de mayor a menor según el cruce entre impacto financiero y esfuerzo métrico requerido.</div>
+     </div>
+     <div class="tech-cell reveal reveal-delay-1" style="padding: 32px; align-items: flex-start; justify-content: flex-start; gap: 16px;">
+        <div style="font-size: 24px;">⚙️</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; color: var(--indigo);">Arquitectura Sugerida</div>
+        <div style="font-size: 14px; color: var(--muted); line-height: 1.6;">Las herramientas específicas (Make, n8n, OpenAI, Supabase) que nosotros usaríamos y conectores lógicos propuestos.</div>
+     </div>
+     <div class="tech-cell reveal reveal-delay-2" style="padding: 32px; align-items: flex-start; justify-content: flex-start; gap: 16px; grid-column: span 2; background: var(--offwhite);">
+        <div style="font-size: 24px;">💡</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; color: var(--indigo);">El veredicto sincero</div>
+        <div style="font-size: 14px; color: var(--muted); line-height: 1.6;">Si tu necesidad se puede arreglar usando simplemente Zapier, te lo diremos. Si requiere vectorización de DB y LLMs afinados, calcularemos la viabilidad. Transparencia técnica ante todo.</div>
+     </div>
+  </div>
+</section>
+
+<!-- BIG CTA -->
+<section class="bigcta-section">
+  <div class="bigcta-inner">
+    <h2 class="bigcta-title reveal">Todo empieza con tu<br><em>contexto.</em></h2>
+    <p class="bigcta-sub reveal reveal-delay-1">Sin compromisos oscuros. Solo información poderosa.</p>
+    <div class="bigcta-btns reveal reveal-delay-2" style="justify-content: center;">
+      <button class="btn-hero-primary" onclick="startDiagnostic()" style="font-family: 'Space Grotesk', sans-serif;">Iniciar Diagnóstico</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Placeholder -->
+<div id="footer-placeholder"></div>
+
+<!-- Step Form Modal (Chat conversacional) -->
+<div id="diagnostic-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; overflow-y: auto;">
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: var(--dark); border: 1px solid var(--border); border-radius: 12px; max-width: 900px; width: 100%; position: relative; padding: 20px; max-height: 90vh; display: flex; flex-direction: column;">
+            <button onclick="closeDiagnostic()" style="position: absolute; top: 16px; right: 24px; background: transparent; border: none; color: white; font-size: 32px; cursor: pointer; line-height: 1; transition: 0.2s;">&times;</button>
+            <div id="diagnostic-chat-content" style="flex: 1; display: flex; flex-direction: column; overflow: hidden; margin-top: 40px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="../js/components-loader.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/diagnostic-chat.js"></script>
+<script>
+// reveal animations for scroll
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => obs.observe(el));
+
+let diagnosticChat;
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof DiagnosticChat === 'undefined') console.error('DiagnosticChat no está definido.');
+});
+
+function startDiagnostic() {
+    if (typeof DiagnosticChat === 'undefined') {
+        alert('Error al cargar el diagnóstico. Por favor, recarga.');
+        return;
+    }
+    const modal = document.getElementById('diagnostic-modal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    if (!diagnosticChat) {
+        diagnosticChat = new DiagnosticChat({ webhookUrl: 'https://n8n.weavewp.com/webhook-test/c1d7aaaf-447a-4da5-a37f-bb3ca8227591' });
+        diagnosticChat.start('diagnostic-chat-content');
+    }
+}
+
+function closeDiagnostic() {
+    if (confirm('¿Seguro que quieres salir? Se perderá el progreso.')) {
+        document.getElementById('diagnostic-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        diagnosticChat = null;
+        document.getElementById('diagnostic-chat-content').innerHTML = '';
+    }
+}
+
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDiagnostic(); });
+document.getElementById('diagnostic-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'diagnostic-modal') closeDiagnostic();
+});
+</script>
+</body>
+</html>

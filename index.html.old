@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weaves — Recupera el tiempo que ahora gastas en trabajo manual. Sin errores. Sin contratar.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --indigo: #1E2A4A;
+  --indigo-deep: #151E37;
+  --teal: #00B4A6;
+  --amber: #F59E0B;
+  --offwhite: #F8F9FC;
+  --dark: #0B1220;
+  --text: #1F2937;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --green: #10B981;
+  --red: #EF4444;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: white;
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--amber); color: var(--indigo); }
+
+/* ═══════════ NAV ═══════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 32px;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(11,18,32,0.0);
+  transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(11,18,32,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-left { display: flex; align-items: center; gap: 48px; }
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-logo-mark svg { width: 28px; height: 28px; }
+.nav-wordmark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600; font-size: 20px;
+  color: white; letter-spacing: -0.02em;
+}
+.nav-links {
+  display: flex; gap: 32px; list-style: none; align-items: center;
+}
+.nav-links a {
+  font-size: 14px; font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none; transition: color 0.18s;
+}
+.nav-links a:hover { color: var(--teal); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-ghost {
+  font-size: 14px; font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none; transition: color 0.18s;
+}
+.nav-ghost:hover { color: white; }
+.nav-cta {
+  background: white; color: var(--indigo);
+  font-weight: 500; font-size: 14px;
+  padding: 12px 24px; border-radius: 10px;
+  text-decoration: none; transition: all 0.18s;
+  letter-spacing: -0.005em;
+}
+.nav-cta:hover {
+  background: var(--amber);
+}
+
+/* ═══════════ HERO ═══════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--dark);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 120px 0 80px;
+}
+
+/* organic gradient background */
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 75% 35%, rgba(245,158,11,0.5) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 55% at 85% 55%, rgba(245,158,11,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 60% at 65% 75%, rgba(0,180,166,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 50% at 20% 85%, rgba(30,42,74,0.6) 0%, transparent 60%),
+    linear-gradient(135deg, var(--indigo-deep) 0%, #1A1530 60%, #2A1A3A 100%);
+  filter: blur(0px);
+}
+.hero-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 30% 45% at 85% 30%, rgba(255,200,100,0.25), transparent 60%),
+    radial-gradient(ellipse 35% 30% at 70% 85%, rgba(0,180,166,0.2), transparent 60%);
+  mix-blend-mode: screen;
+}
+/* grain overlay */
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1400px; margin: 0 auto;
+  padding: 0 48px;
+  width: 100%;
+}
+
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(48px, 8vw, 104px);
+  font-weight: 400;
+  line-height: 1.0;
+  color: white;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+  max-width: 14ch;
+  animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255,255,255,0.9);
+}
+
+.hero-sub {
+  font-size: 18px; font-weight: 300; line-height: 1.55;
+  color: rgba(255,255,255,0.7);
+  max-width: 520px;
+  margin-bottom: 40px;
+  animation: rise 1s 0.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hero-sub strong { color: white; font-weight: 500; }
+
+.hero-ctas {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  animation: rise 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.btn-hero-primary {
+  background: white; color: var(--indigo);
+  font-weight: 500; font-size: 16px;
+  padding: 16px 36px; border-radius: 12px;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: all 0.2s; letter-spacing: -0.005em;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-hero-primary:hover {
+  background: var(--amber);
+  transform: translateY(-1px);
+}
+.btn-hero-secondary {
+  background: transparent; color: white;
+  font-weight: 500; font-size: 16px;
+  padding: 16px 36px; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.25);
+  cursor: pointer; text-decoration: none;
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-hero-secondary:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.5);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════ LOGOS MARQUEE ═══════════ */
+.marquee-section {
+  background: var(--dark);
+  padding: 48px 0 64px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  position: relative;
+}
+.marquee-section::before,
+.marquee-section::after {
+  content: ''; position: absolute; top: 0; bottom: 0;
+  width: 120px; z-index: 2; pointer-events: none;
+}
+.marquee-section::before { left: 0; background: linear-gradient(90deg, var(--dark), transparent); }
+.marquee-section::after { right: 0; background: linear-gradient(-90deg, var(--dark), transparent); }
+
+.marquee-label {
+  max-width: 1400px; margin: 0 auto 28px;
+  padding: 0 48px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  display: flex; align-items: center; gap: 14px;
+}
+.marquee-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+}
+
+.marquee-wrap {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex; gap: 72px;
+  flex-shrink: 0;
+  animation: marquee 32s linear infinite;
+  padding-right: 72px;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+.marquee-item {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500; font-size: 22px;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.marquee-item:hover { color: rgba(255,255,255,0.85); }
+
+/* ═══════════ SECTION BASE ═══════════ */
+.section {
+  padding: 140px 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 20px;
+}
+.section-eyebrow::before {
+  content: ''; width: 16px; height: 1px; background: var(--teal);
+}
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(34px, 5vw, 64px);
+  font-weight: 400;
+  color: var(--indigo); line-height: 1.05; letter-spacing: -0.03em;
+  max-width: 20ch;
+}
+.section-title em { font-style: italic; font-weight: 300; color: var(--teal); }
+.section-sub {
+  font-size: 18px; color: var(--muted); margin-top: 20px;
+  max-width: 560px; line-height: 1.65; font-weight: 300;
+}
+
+/* ═══════════ RESULTADOS STRIP ═══════════ */
+.results-section {
+  background: var(--offwhite);
+  padding: 120px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.results-inner {
+  max-width: 1400px; margin: 0 auto;
+  padding: 0 48px;
+}
+.results-header {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  margin-bottom: 80px; align-items: end;
+}
+.results-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+.result-cell {
+  padding: 56px 40px 52px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: white;
+  transition: background 0.2s;
+}
+.result-cell:hover { background: #FAFBFE; }
+.result-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 72px; font-weight: 400;
+  color: var(--indigo); line-height: 0.95;
+  letter-spacing: -0.04em;
+  display: flex; align-items: baseline;
+}
+.result-num sup { font-size: 28px; color: var(--teal); margin-left: 2px; font-weight: 500; }
+.result-num .unit { font-size: 22px; color: var(--muted); margin-left: 6px; font-weight: 400; }
+.result-desc {
+  font-size: 14px; color: var(--muted);
+  margin-top: 20px; line-height: 1.55;
+}
+.result-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 16px;
+}
+
+/* ═══════════ FEATURE SPLIT ═══════════ */
+.feature-section {
+  padding: 140px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.feature-section.dark {
+  background: var(--dark); color: white;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.feature-section.dark .section-title { color: white; }
+.feature-section.dark .section-title em { color: var(--amber); }
+.feature-section.dark .section-sub { color: rgba(255,255,255,0.6); }
+
+.feature-inner {
+  max-width: 1400px; margin: 0 auto;
+  padding: 0 48px;
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px;
+  align-items: center;
+}
+.feature-section.reversed .feature-inner {
+  grid-template-columns: 1.1fr 1fr;
+}
+.feature-section.reversed .feature-visual {
+  order: -1;
+}
+
+.feature-checks {
+  margin-top: 32px;
+  list-style: none;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.feature-check {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 15px; color: var(--text);
+}
+.feature-section.dark .feature-check { color: rgba(255,255,255,0.85); }
+.check-icon {
+  width: 28px; height: 28px; flex-shrink: 0;
+  background: var(--amber);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.check-icon svg { width: 14px; height: 14px; stroke: var(--indigo); stroke-width: 3; }
+
+.feature-cta {
+  margin-top: 40px;
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--indigo); font-weight: 500; font-size: 15px;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--indigo);
+  transition: gap 0.2s, color 0.2s, border-color 0.2s;
+}
+.feature-section.dark .feature-cta {
+  color: white; border-bottom-color: rgba(255,255,255,0.4);
+}
+.feature-cta:hover { gap: 14px; color: var(--teal); border-bottom-color: var(--teal); }
+.feature-cta svg { width: 14px; height: 14px; }
+
+/* VISUAL — Workflow mockup */
+.feature-visual {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--indigo) 0%, #2A3560 100%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 30px 80px rgba(30,42,74,0.15);
+}
+.feature-visual::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(245,158,11,0.25), transparent 50%),
+    radial-gradient(circle at 30% 70%, rgba(0,180,166,0.25), transparent 50%);
+}
+.feature-visual::after {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 90%);
+}
+
+/* Workflow diagram */
+.workflow {
+  position: relative; z-index: 1;
+  width: 85%; padding: 28px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+}
+.wf-node {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 14px 14px;
+  display: flex; flex-direction: column; gap: 8px;
+  transition: all 0.3s;
+}
+.wf-node:hover {
+  background: rgba(0,180,166,0.15);
+  border-color: rgba(0,180,166,0.4);
+  transform: translateY(-2px);
+}
+.wf-node-icon {
+  width: 36px; height: 36px;
+  background: rgba(0,180,166,0.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.wf-node-icon svg { width: 14px; height: 14px; stroke: var(--teal); stroke-width: 1.5; }
+.wf-node-title { font-size: 11px; font-weight: 600; color: white; }
+.wf-node-desc { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.5); }
+.wf-node.amber .wf-node-icon { background: rgba(245,158,11,0.2); }
+.wf-node.amber .wf-node-icon svg { stroke: var(--amber); }
+
+/* Chat mockup */
+.chat-mock {
+  position: relative; z-index: 1;
+  width: 78%; max-width: 380px;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.chat-header {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.chat-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--indigo));
+  display: flex; align-items: center; justify-content: center;
+}
+.chat-avatar svg { width: 18px; height: 18px; stroke: white; stroke-width: 2; }
+.chat-name { font-weight: 600; font-size: 13px; color: var(--indigo); }
+.chat-status { font-size: 11px; color: var(--green); display: flex; align-items: center; gap: 5px; }
+.chat-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+.chat-bubble {
+  padding: 10px 14px; border-radius: 14px;
+  font-size: 13px; line-height: 1.5;
+  max-width: 85%;
+}
+.chat-bubble.them {
+  background: var(--offwhite); color: var(--text);
+  border-top-left-radius: 4px;
+  align-self: flex-start;
+}
+.chat-bubble.me {
+  background: var(--indigo); color: white;
+  border-top-right-radius: 4px;
+  align-self: flex-end;
+}
+.chat-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: var(--muted);
+  display: flex; align-items: center; gap: 4px;
+  align-self: flex-end;
+}
+.chat-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--teal); }
+
+/* Dashboard mockup */
+.dashboard-mock {
+  position: relative; z-index: 1;
+  width: 88%;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.dash-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.dash-title { font-weight: 600; font-size: 13px; color: var(--indigo); }
+.dash-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--teal);
+  background: rgba(0,180,166,0.1); padding: 3px 8px; border-radius: 4px;
+}
+.dash-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dash-stat {
+  background: var(--offwhite); border-radius: 10px; padding: 14px;
+}
+.dash-stat-label { font-size: 10px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+.dash-stat-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600; font-size: 22px; color: var(--indigo); margin-top: 4px;
+  display: flex; align-items: baseline; gap: 4px;
+}
+.dash-stat-val .up { font-size: 11px; color: var(--green); font-weight: 500; }
+.dash-chart { height: 60px; position: relative; }
+.dash-chart svg { width: 100%; height: 100%; }
+
+/* Code-ish mockup */
+.code-mock {
+  position: relative; z-index: 1;
+  width: 88%;
+  background: #0D1117;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.75;
+  color: #E6EDF3;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.code-dots {
+  display: flex; gap: 6px; padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 14px;
+}
+.code-dot { width: 11px; height: 11px; border-radius: 50%; }
+.code-dot.r { background: #FF5F57; }
+.code-dot.y { background: #FFBD2E; }
+.code-dot.g { background: #28CA42; }
+.code-dot.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,0.4);
+  margin-left: 12px; width: auto;
+}
+.code-line { display: block; }
+.code-keyword { color: #FF7B72; }
+.code-string { color: #A5D6FF; }
+.code-num { color: #79C0FF; }
+.code-fn { color: var(--teal); }
+.code-comment { color: #8B949E; }
+.code-indent { padding-left: 22px; }
+
+/* ═══════════ TECH GRID ═══════════ */
+.tech-section {
+  padding: 140px 48px;
+  max-width: 1400px; margin: 0 auto;
+}
+.tech-header {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: end; margin-bottom: 72px;
+}
+.tech-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+.tech-cell {
+  padding: 32px 24px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 130px;
+  transition: all 0.2s;
+  cursor: default;
+}
+.tech-cell:hover {
+  background: var(--offwhite);
+}
+.tech-cell:hover .tech-name { color: var(--teal); }
+.tech-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500; font-size: 18px; color: var(--indigo);
+  transition: color 0.2s;
+  letter-spacing: -0.01em;
+}
+.tech-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════ CASO ESTELAR ═══════════ */
+.case-section {
+  background: var(--indigo);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  padding: 160px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.case-section::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 85% 30%, rgba(245,158,11,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 15% 80%, rgba(0,180,166,0.1) 0%, transparent 60%);
+}
+.case-inner {
+  position: relative; z-index: 1;
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+}
+.case-layout {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 100px;
+  align-items: center;
+}
+.case-eyebrow {
+  color: var(--teal);
+}
+.case-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 400; color: white; line-height: 1.02;
+  letter-spacing: -0.03em; margin-bottom: 32px;
+}
+.case-title em { font-style: italic; font-weight: 300; color: var(--amber); }
+.case-body {
+  font-size: 17px; font-weight: 300; line-height: 1.65;
+  color: rgba(255,255,255,0.7); margin-bottom: 36px;
+  max-width: 520px;
+}
+.case-quote {
+  border-left: 2px solid var(--teal);
+  padding: 4px 0 4px 24px;
+  margin-bottom: 40px;
+  max-width: 520px;
+}
+.case-quote-text {
+  font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.85);
+  font-style: italic; font-weight: 300;
+}
+.case-quote-author {
+  font-size: 13px; color: var(--teal); margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+}
+
+.case-metrics-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.case-metric {
+  padding: 40px 28px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.02);
+  transition: background 0.2s;
+}
+.case-metric:hover { background: rgba(0,180,166,0.06); }
+.case-metric-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 54px; font-weight: 400; color: white;
+  line-height: 0.95; letter-spacing: -0.04em;
+  display: flex; align-items: baseline;
+}
+.case-metric-num sup { color: var(--amber); font-size: 20px; margin-left: 2px; font-weight: 500; }
+.case-metric-num .unit { color: rgba(255,255,255,0.4); font-size: 17px; margin-left: 6px; }
+.case-metric-label {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  margin-top: 18px; line-height: 1.5;
+}
+
+.btn-case {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: white; font-weight: 500; font-size: 15px;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  transition: all 0.2s;
+}
+.btn-case:hover { gap: 14px; color: var(--amber); border-bottom-color: var(--amber); }
+.btn-case svg { width: 14px; height: 14px; }
+
+/* Feature CTA arrows */
+.feature-cta svg { width: 14px; height: 14px; }
+
+/* Hero button arrows */
+.btn-hero-primary svg, .btn-hero-secondary svg { width: 16px; height: 16px; }
+
+/* ═══════════ TESTIMONIOS MARQUEE ═══════════ */
+.testi-section {
+  padding: 140px 0;
+  overflow: hidden;
+  background: var(--offwhite);
+  border-bottom: 1px solid var(--border);
+}
+.testi-inner {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  margin-bottom: 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+}
+.testi-marquee-wrap {
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.testi-marquee {
+  display: flex; gap: 20px; padding: 0 20px;
+  animation: slide 55s linear infinite;
+  width: max-content;
+}
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.testi-card {
+  flex-shrink: 0;
+  width: 380px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex; flex-direction: column;
+  transition: all 0.25s;
+}
+.testi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(30,42,74,0.1);
+  border-color: var(--teal);
+}
+.testi-stars {
+  display: flex; gap: 3px; margin-bottom: 18px;
+}
+.testi-stars svg { width: 14px; height: 14px; fill: var(--amber); }
+.testi-text {
+  font-size: 15px; color: var(--text); line-height: 1.65;
+  margin-bottom: 24px;
+  font-weight: 400;
+  flex: 1;
+}
+.testi-author {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.testi-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--indigo), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600; font-size: 14px; color: white;
+  flex-shrink: 0;
+}
+.testi-name { font-weight: 600; font-size: 14px; color: var(--indigo); }
+.testi-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ═══════════ BIG CTA ═══════════ */
+.bigcta-section {
+  background: var(--dark);
+  position: relative; overflow: hidden;
+  padding: 160px 48px;
+  text-align: center;
+}
+.bigcta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(245,158,11,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(0,180,166,0.12) 0%, transparent 55%);
+}
+.bigcta-section::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.6; mix-blend-mode: overlay;
+}
+.bigcta-inner {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto;
+}
+.bigcta-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(42px, 6.5vw, 92px);
+  font-weight: 400; color: white; line-height: 1.0;
+  letter-spacing: -0.04em; margin-bottom: 28px;
+}
+.bigcta-title em { font-style: italic; font-weight: 300; color: var(--amber); }
+.bigcta-sub {
+  font-size: 18px; color: rgba(255,255,255,0.6);
+  max-width: 540px; margin: 0 auto 44px; font-weight: 300;
+  line-height: 1.65;
+}
+.bigcta-btns {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.bigcta-assurances {
+  display: flex; gap: 28px; justify-content: center; flex-wrap: wrap;
+  font-size: 13px; color: rgba(255,255,255,0.4);
+}
+.bigcta-ass { display: flex; align-items: center; gap: 6px; }
+.bigcta-ass svg { width: 13px; height: 13px; stroke: var(--teal); }
+
+/* ═══════════ FOOTER ═══════════ */
+footer {
+  background: var(--dark);
+  padding: 80px 48px 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-inner { max-width: 1400px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 48px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.footer-brand-block {}
+.footer-logo-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+}
+.footer-wordmark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600; font-size: 19px; color: white;
+}
+.footer-blurb {
+  font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6;
+  max-width: 280px; margin-bottom: 24px; font-weight: 300;
+}
+.footer-social { display: flex; gap: 8px; }
+.social-btn {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.18s;
+  text-decoration: none;
+}
+.social-btn:hover {
+  background: rgba(245,158,11,0.15);
+  border-color: rgba(245,158,11,0.4);
+}
+.social-btn svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.5); }
+.social-btn:hover svg { stroke: var(--amber); }
+
+.footer-col-title {
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4);
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a {
+  font-size: 14px; color: rgba(255,255,255,0.7);
+  text-decoration: none; transition: color 0.18s;
+}
+.footer-links a:hover { color: var(--amber); }
+
+.footer-bottom {
+  padding-top: 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.3); }
+.footer-legal-row { display: flex; gap: 20px; }
+.footer-legal-row a {
+  font-size: 13px; color: rgba(255,255,255,0.3);
+  text-decoration: none; transition: color 0.18s;
+}
+.footer-legal-row a:hover { color: rgba(255,255,255,0.6); }
+
+/* ═══════════ REVEAL ═══════════ */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media (max-width: 1024px) {
+  .results-grid { grid-template-columns: 1fr 1fr; }
+  .tech-grid { grid-template-columns: repeat(3, 1fr); }
+  .feature-inner, .feature-section.reversed .feature-inner { grid-template-columns: 1fr; gap: 48px; }
+  .feature-section.reversed .feature-visual { order: 0; }
+  .case-layout { grid-template-columns: 1fr; gap: 64px; }
+  .results-header, .tech-header, .testi-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-left { gap: 0; }
+  .section, .hero-content, .marquee-label, .results-inner, .feature-inner, .tech-section, .case-inner, .testi-inner, footer { padding-left: 24px; padding-right: 24px; }
+  .hero { padding: 120px 0 64px; }
+  .section, .results-section, .feature-section, .case-section, .testi-section, .bigcta-section { padding-top: 80px; padding-bottom: 80px; }
+  .results-grid { grid-template-columns: 1fr; }
+  .tech-grid { grid-template-columns: repeat(2, 1fr); }
+  .case-metrics-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .testi-card { width: 300px; padding: 24px; }
+  .result-num { font-size: 54px; }
+  .case-metric-num { font-size: 40px; }
+  .feature-visual { aspect-ratio: 3/2; }
+  .result-cell { padding: 36px 24px; }
+  .workflow { width: 92%; padding: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-left">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 32 32" fill="none">
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+              <stop offset="0%" stop-color="#F59E0B"/>
+              <stop offset="100%" stop-color="#00B4A6"/>
+            </linearGradient>
+          </defs>
+          <path d="M4 14 C4 8, 10 4, 16 7 C22 10, 22 20, 16 24 C10 27, 4 24, 4 18" stroke="url(#logoGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M11 15 L14 18 L20 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="nav-wordmark">Weaves</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#sectores">Sectores</a></li>
+      <li><a href="#casos">Casos de Éxito</a></li>
+      <li><a href="#equipo">Quiénes Somos</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="nav-ghost">Iniciar sesión</a>
+    <a href="#" class="nav-cta">Diagnóstico gratuito</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Recupera el tiempo que ahora gastas en trabajo manual.<br>Sin errores. Sin contratar.</h1>
+    <p class="hero-sub">
+      Automatizamos los procesos operativos de tu empresa — para que tu equipo trabaje en lo que <strong>realmente</strong> hace crecer el negocio.
+    </p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-hero-primary">
+        Agenda tu diagnóstico
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#casos" class="btn-hero-secondary">
+        Ver casos de éxito
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="marquee-section">
+  <div class="marquee-label">
+    <span>Empresas que ya automatizaron con Weaves</span>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">Rubik Express</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Empieza de Cero</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Ananta Seguridad</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Stellamia</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Lunea</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Transi</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">iWisit</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Zuzel Amelia</span>
+      <span class="marquee-item">·</span>
+    </div>
+    <div class="marquee-track" aria-hidden="true">
+      <span class="marquee-item">Rubik Express</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Empieza de Cero</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Ananta Seguridad</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Stellamia</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Lunea</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Transi</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">iWisit</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Zuzel Amelia</span>
+      <span class="marquee-item">·</span>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section class="results-section" id="resultados">
+  <div class="results-inner">
+    <div class="results-header">
+      <div>
+        <div class="section-eyebrow reveal">Resultados tangibles</div>
+        <h2 class="section-title reveal">Inversión inteligente,<br><em>retorno medible</em>.</h2>
+      </div>
+      <p class="section-sub reveal reveal-delay-1" style="align-self: end;">Descubre cómo la automatización puede transformar tu negocio con resultados medibles desde el primer mes.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-cell reveal">
+        <div class="result-label">Tiempo</div>
+        <div class="result-num">400<span class="unit">h/día</span></div>
+        <div class="result-desc">Horas de trabajo manual ahorradas. Tu equipo enfocado en lo que realmente genera valor.</div>
+      </div>
+      <div class="result-cell reveal reveal-delay-1">
+        <div class="result-label">Precisión</div>
+        <div class="result-num">95<sup>%</sup></div>
+        <div class="result-desc">Menos errores humanos. Precisión en tareas administrativas y repetitivas.</div>
+      </div>
+      <div class="result-cell reveal reveal-delay-2">
+        <div class="result-label">Ahorro</div>
+        <div class="result-num">30<sup>–50%</sup></div>
+        <div class="result-desc">Reducción de costes operativos. ROI medible desde el primer mes.</div>
+      </div>
+      <div class="result-cell reveal reveal-delay-3">
+        <div class="result-label">Disponibilidad</div>
+        <div class="result-num">24<span class="unit">/7</span></div>
+        <div class="result-desc">Atención al cliente disponible. WhatsApp, web y redes. Sin costes extra.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 1 — Atención al cliente -->
+<section class="feature-section" id="servicios">
+  <div class="feature-inner">
+    <div class="feature-text">
+      <div class="section-eyebrow reveal">01 — Atención al cliente</div>
+      <h2 class="section-title reveal">Responde 24/7.<br><em>Sin contratar.</em></h2>
+      <p class="section-sub reveal reveal-delay-1">Automatiza hasta el 70% de las consultas comunes en WhatsApp, web y redes — sin perder el toque humano que fideliza.</p>
+      <ul class="feature-checks reveal reveal-delay-2">
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Integración nativa con Chatwoot y WhatsApp Business
+        </li>
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Escalado inteligente a humanos cuando hace falta
+        </li>
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Entrenado con la información y tono de tu empresa
+        </li>
+      </ul>
+      <a href="#" class="feature-cta reveal reveal-delay-3">
+        Conocer el servicio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="feature-visual reveal reveal-delay-2">
+      <div class="chat-mock">
+        <div class="chat-header">
+          <div class="chat-avatar">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div>
+            <div class="chat-name">Asistente Weaves</div>
+            <div class="chat-status">En línea · responde al instante</div>
+          </div>
+        </div>
+        <div class="chat-bubble them">Hola, quisiera información sobre sus servicios de automatización 👋</div>
+        <div class="chat-bubble me">¡Hola! Claro. ¿Qué tipo de proceso te gustaría automatizar? Puedo ayudarte con atención al cliente, facturación, o marketing.</div>
+        <div class="chat-bubble them">Atención al cliente en WhatsApp. ¿Cuánto tarda en implementarse?</div>
+        <div class="chat-bubble me">Normalmente entre 2 y 3 semanas. Te agendo una llamada gratuita con un especialista para mostrarte el proceso. ¿Mañana a las 10:00?</div>
+        <div class="chat-meta"><span class="dot"></span>Respuesta en 0.8s · Automatizado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 2 — Procesos internos (DARK, reversed) -->
+<section class="feature-section dark reversed">
+  <div class="feature-inner">
+    <div class="feature-visual reveal">
+      <div class="workflow">
+        <div class="wf-node">
+          <div class="wf-node-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="wf-node-title">Factura recibida</div>
+          <div class="wf-node-desc">→ email_in</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-node-icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="wf-node-title">IA procesa datos</div>
+          <div class="wf-node-desc">→ ocr + extract</div>
+        </div>
+        <div class="wf-node amber">
+          <div class="wf-node-icon">
+            <svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="wf-node-title">Validación</div>
+          <div class="wf-node-desc">→ ok</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-node-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M20 12v-4H6a2 2 0 00-2 2v10a2 2 0 002 2h14v-4"/><path d="M18 12a2 2 0 000 4h4v-4z"/></svg>
+          </div>
+          <div class="wf-node-title">ERP actualizado</div>
+          <div class="wf-node-desc">→ odoo_push</div>
+        </div>
+        <div class="wf-node">
+          <div class="wf-node-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+          </div>
+          <div class="wf-node-title">Email al cliente</div>
+          <div class="wf-node-desc">→ sendmail</div>
+        </div>
+        <div class="wf-node amber">
+          <div class="wf-node-icon">
+            <svg viewBox="0 0 24 24" fill="none"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div class="wf-node-title">Reporte</div>
+          <div class="wf-node-desc">→ dashboard</div>
+        </div>
+      </div>
+    </div>
+    <div class="feature-text">
+      <div class="section-eyebrow reveal">02 — Procesos internos</div>
+      <h2 class="section-title reveal">Flujos automáticos<br>que <em>nunca se olvidan.</em></h2>
+      <p class="section-sub reveal reveal-delay-1">Facturación, reportes, sincronización de CRM. Procesos críticos que se ejecutan solos, sin errores de copiado, sin tareas olvidadas.</p>
+      <ul class="feature-checks reveal reveal-delay-2">
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Integración con CRM, ERP y herramientas internas
+        </li>
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Validación automática de datos y alertas de anomalías
+        </li>
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Logs y trazabilidad completa de cada ejecución
+        </li>
+      </ul>
+      <a href="#" class="feature-cta reveal reveal-delay-3">
+        Conocer el servicio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 3 — Marketing & ventas -->
+<section class="feature-section">
+  <div class="feature-inner">
+    <div class="feature-text">
+      <div class="section-eyebrow reveal">03 — Marketing y ventas</div>
+      <h2 class="section-title reveal">Contenido que escala.<br><em>Campañas que rinden.</em></h2>
+      <p class="section-sub reveal reveal-delay-1">Agentes que crean contenido, optimizan campañas publicitarias y generan hasta un +50% de ROI sobre tus canales actuales.</p>
+      <ul class="feature-checks reveal reveal-delay-2">
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Generación automática de posts para redes sociales
+        </li>
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Email marketing personalizado con IA
+        </li>
+        <li class="feature-check">
+          <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Optimización continua de campañas en Meta y Google Ads
+        </li>
+      </ul>
+      <a href="#" class="feature-cta reveal reveal-delay-3">
+        Conocer el servicio
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="feature-visual reveal reveal-delay-2">
+      <div class="dashboard-mock">
+        <div class="dash-header">
+          <div class="dash-title">Campaña — Q2 2026</div>
+          <div class="dash-tag">· en vivo</div>
+        </div>
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <div class="dash-stat-label">ROI</div>
+            <div class="dash-stat-val">+52% <span class="up">↑</span></div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">CPA</div>
+            <div class="dash-stat-val">8.40€ <span class="up">↓34%</span></div>
+          </div>
+        </div>
+        <div class="dash-chart">
+          <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00B4A6" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#00B4A6" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,45 L30,42 L60,38 L90,40 L120,30 L150,28 L180,22 L210,18 L240,20 L270,12 L300,8 L300,60 L0,60 Z" fill="url(#chartGrad)"/>
+            <path d="M0,45 L30,42 L60,38 L90,40 L120,30 L150,28 L180,22 L210,18 L240,20 L270,12 L300,8" fill="none" stroke="#00B4A6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA — Ver todas las soluciones -->
+<section class="all-services-cta" style="text-align:center; padding: 120px 48px; background: var(--offwhite); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div style="max-width: 1400px; margin: 0 auto;">
+    <div class="section-eyebrow reveal" style="justify-content: center;">Nuestras soluciones</div>
+    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px,4vw,48px); color: var(--indigo); margin-bottom: 20px; letter-spacing: -0.03em; line-height: 1.1;">¿No encuentras lo que necesitas?</h2>
+    <p style="font-size: 18px; color: var(--muted); margin-bottom: 36px; font-weight: 300; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65;">Tenemos 9 soluciones adaptadas a tu negocio. Explora todas y encuentra la mejor para tu empresa.</p>
+    <a href="servicios/index.html" class="btn-hero-primary" style="background: var(--indigo); color: white;">Ver todas las soluciones →</a>
+  </div>
+</section>
+
+<!-- TECH -->
+<section class="tech-section" id="tecnologia">
+  <div class="tech-header">
+    <div>
+      <div class="section-eyebrow reveal">Tecnología</div>
+      <h2 class="section-title reveal">Poder de enterprise,<br><em>coste de PYME.</em></h2>
+    </div>
+    <p class="section-sub reveal reveal-delay-1" style="align-self: end;">Trabajamos con herramientas open source y SaaS líderes para optimizar costes y garantizar tu independencia tecnológica.</p>
+  </div>
+  <div class="tech-grid">
+    <div class="tech-cell reveal"><span class="tech-num">01</span><span class="tech-name">OpenAI</span></div>
+    <div class="tech-cell reveal"><span class="tech-num">02</span><span class="tech-name">n8n</span></div>
+    <div class="tech-cell reveal"><span class="tech-num">03</span><span class="tech-name">Chatwoot</span></div>
+    <div class="tech-cell reveal"><span class="tech-num">04</span><span class="tech-name">Make</span></div>
+    <div class="tech-cell reveal"><span class="tech-num">05</span><span class="tech-name">Zapier</span></div>
+    <div class="tech-cell reveal"><span class="tech-num">06</span><span class="tech-name">Python</span></div>
+    <div class="tech-cell reveal reveal-delay-1"><span class="tech-num">07</span><span class="tech-name">Node.js</span></div>
+    <div class="tech-cell reveal reveal-delay-1"><span class="tech-num">08</span><span class="tech-name">Azure</span></div>
+    <div class="tech-cell reveal reveal-delay-1"><span class="tech-num">09</span><span class="tech-name">Google Cloud</span></div>
+    <div class="tech-cell reveal reveal-delay-1"><span class="tech-num">10</span><span class="tech-name">AWS</span></div>
+    <div class="tech-cell reveal reveal-delay-1"><span class="tech-num">11</span><span class="tech-name">Docker</span></div>
+    <div class="tech-cell reveal reveal-delay-1"><span class="tech-num">12</span><span class="tech-name">Gemini</span></div>
+    <div class="tech-cell reveal reveal-delay-2"><span class="tech-num">13</span><span class="tech-name">LangChain</span></div>
+    <div class="tech-cell reveal reveal-delay-2"><span class="tech-num">14</span><span class="tech-name">Supabase</span></div>
+    <div class="tech-cell reveal reveal-delay-2"><span class="tech-num">15</span><span class="tech-name">PostgreSQL</span></div>
+    <div class="tech-cell reveal reveal-delay-2"><span class="tech-num">16</span><span class="tech-name">Vector DBs</span></div>
+    <div class="tech-cell reveal reveal-delay-2"><span class="tech-num">17</span><span class="tech-name">Anthropic</span></div>
+    <div class="tech-cell reveal reveal-delay-2"><span class="tech-num">∞</span><span class="tech-name" style="color: var(--muted); font-style: italic;">y más</span></div>
+  </div>
+</section>
+
+<!-- CASO DESTACADO -->
+<section class="case-section" id="casos">
+  <div class="case-inner">
+    <div class="case-layout">
+      <div>
+        <div class="section-eyebrow case-eyebrow reveal">Caso de éxito destacado</div>
+        <h2 class="case-title reveal">ROI en 7 meses.<br>20.000€ ahorrados.<br><em>40% más productivos.</em></h2>
+        <p class="case-body reveal reveal-delay-1">Automatizamos la gestión de reportes y la sincronización de leads entre el sitio web y el CRM de una PYME de servicios profesionales. El resultado: ahorro anual de 20.000€ y aumento de productividad del 40%.</p>
+        <div class="case-quote reveal reveal-delay-2">
+          <div class="case-quote-text">Nunca pensé que la automatización con IA pudiera ser tan accesible y traer resultados tan rápidos. Ahora dedicamos más tiempo a nuestros clientes y menos a tareas manuales.</div>
+          <div class="case-quote-author">— Director de Operaciones, Consultora Legal</div>
+        </div>
+        <a href="#" class="btn-case reveal reveal-delay-3">
+          Ver el caso completo
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8h10M8 3l5 5-5 5"/></svg>
+        </a>
+      </div>
+      <div class="case-metrics-grid reveal reveal-delay-2">
+        <div class="case-metric">
+          <div class="case-metric-num">7<span class="unit">meses</span></div>
+          <div class="case-metric-label">Tiempo para amortizar la inversión completa</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">20K<sup>€</sup></div>
+          <div class="case-metric-label">Ahorro anual en costes operativos</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">40<sup>%</sup></div>
+          <div class="case-metric-label">Aumento de productividad del equipo</div>
+        </div>
+        <div class="case-metric">
+          <div class="case-metric-num">95<sup>%</sup></div>
+          <div class="case-metric-label">Reducción de errores operativos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testi-section">
+  <div class="testi-inner">
+    <div>
+      <div class="section-eyebrow reveal">Testimonios</div>
+      <h2 class="section-title reveal">Lo que dicen<br><em>nuestros clientes.</em></h2>
+    </div>
+    <p class="section-sub reveal reveal-delay-1" style="align-self: end;">Historias reales de empresas en España y LatAm que transformaron su operativa.</p>
+  </div>
+  <div class="testi-marquee-wrap">
+    <div class="testi-marquee">
+      <!-- GRUPO 1 -->
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Gracias a Chatwoot ahora atendemos a nuestros clientes por WhatsApp de forma profesional y organizada. La respuesta es inmediata y nuestros clientes están más satisfechos que nunca."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">DA</div>
+          <div><div class="testi-name">David Acuña</div><div class="testi-role">CEO, Rubik Express</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Las notificaciones automáticas por WhatsApp y la gestión de redes sociales nos han liberado horas de trabajo. Ahora nos enfocamos en crear contenido de valor mientras el sistema trabaja solo."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JA</div>
+          <div><div class="testi-name">Julián Alarcón</div><div class="testi-role">CEO, Empieza de Cero</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"La automatización de generación de tickets transformó nuestra operativa. Redujimos errores y tiempos de respuesta drásticamente. Un cambio que impactó directamente en la satisfacción del cliente."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AS</div>
+          <div><div class="testi-name">Alejandro Soto</div><div class="testi-role">CEO, Ananta Seguridad</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Automatizar nuestros procesos críticos fue clave para escalar el servicio sin perder calidad. Ahora podemos atender más clientes manteniendo la excelencia que nos caracteriza."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SK</div>
+          <div><div class="testi-name">Saskia</div><div class="testi-role">CEO, Stellamia</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"El proceso de creación de guías que antes nos tomaba horas, ahora se hace en minutos gracias a la automatización. Ha sido un antes y un después para nuestra productividad."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RT</div>
+          <div><div class="testi-name">Raquel Tebar</div><div class="testi-role">CEO, Lunea</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Mi sitio web inteligente no solo luce profesional, sino que trabaja por mí las 24 horas. La integración de IA ha sido un diferenciador clave para mi negocio."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ZA</div>
+          <div><div class="testi-name">Zuzel Amelia</div><div class="testi-role">Fundadora, Zuzel Amelia</div></div>
+        </div>
+      </div>
+      <!-- GRUPO 2 (duplicado para loop) -->
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Gracias a Chatwoot ahora atendemos a nuestros clientes por WhatsApp de forma profesional y organizada. La respuesta es inmediata y nuestros clientes están más satisfechos que nunca."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">DA</div>
+          <div><div class="testi-name">David Acuña</div><div class="testi-role">CEO, Rubik Express</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Las notificaciones automáticas por WhatsApp y la gestión de redes sociales nos han liberado horas de trabajo. Ahora nos enfocamos en crear contenido de valor mientras el sistema trabaja solo."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JA</div>
+          <div><div class="testi-name">Julián Alarcón</div><div class="testi-role">CEO, Empieza de Cero</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"La automatización de generación de tickets transformó nuestra operativa. Redujimos errores y tiempos de respuesta drásticamente."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AS</div>
+          <div><div class="testi-name">Alejandro Soto</div><div class="testi-role">CEO, Ananta Seguridad</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIG CTA -->
+<section class="bigcta-section">
+  <div class="bigcta-inner">
+    <h2 class="bigcta-title reveal">El próximo capítulo<br>de tu empresa <em>es tuyo.</em></h2>
+    <p class="bigcta-sub reveal reveal-delay-1">Deja de perder tiempo en tareas repetitivas. Agenda tu asesoría gratuita y recibe una propuesta personalizada adaptada a tus objetivos.</p>
+    <div class="bigcta-btns reveal reveal-delay-2">
+      <a href="#" class="btn-hero-primary">
+        Solicitar diagnóstico gratuito
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#" class="btn-hero-secondary">Contactar ahora</a>
+    </div>
+    <div class="bigcta-assurances reveal reveal-delay-3">
+      <div class="bigcta-ass">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sin compromiso
+      </div>
+      <div class="bigcta-ass">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Respuesta en 24h
+      </div>
+      <div class="bigcta-ass">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        100% confidencial
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand-block">
+        <div class="footer-logo-row">
+          <div class="nav-logo-mark">
+            <svg viewBox="0 0 32 32" fill="none">
+              <defs>
+                <linearGradient id="footerGrad" x1="0" y1="0" x2="32" y2="32">
+                  <stop offset="0%" stop-color="#F59E0B"/>
+                  <stop offset="100%" stop-color="#00B4A6"/>
+                </linearGradient>
+              </defs>
+              <path d="M4 14 C4 8, 10 4, 16 7 C22 10, 22 20, 16 24 C10 27, 4 24, 4 18" stroke="url(#footerGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M11 15 L14 18 L20 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="footer-wordmark">Weaves</span>
+        </div>
+        <p class="footer-blurb">Automatizamos los procesos operativos de tu empresa. Sin letra pequeña, sin compromisos ocultos.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" stroke="currentColor" stroke-width="1.5"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Por qué Weaves</div>
+        <ul class="footer-links">
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Nuestros clientes</a></li>
+          <li><a href="#">Carreras</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Servicios</div>
+        <ul class="footer-links">
+          <li><a href="#">Consultoría IA</a></li>
+          <li><a href="#">Chatbots & Atención</a></li>
+          <li><a href="#">Automatización RPA</a></li>
+          <li><a href="#">Marketing IA</a></li>
+          <li><a href="#">Webs inteligentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Recursos</div>
+        <ul class="footer-links">
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Casos de éxito</a></li>
+          <li><a href="#">Tecnología</a></li>
+          <li><a href="#">Documentación</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Términos</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">RGPD</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">Weaves © 2026 · Todos los derechos reservados</div>
+      <div class="footer-legal-row">
+        <a href="#">weavewp.com</a>
+        <a href="#">España · LatAm</a>
+        <a href="#">ES</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// reveal animations
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => obs.observe(el));
+
+// counter animation for results
+const animateCount = (el) => {
+  const node = el.childNodes[0];
+  const raw = node.nodeValue;
+  const match = raw.match(/(\d+)/);
+  if (!match) return;
+  const target = parseInt(match[1]);
+  let current = 0;
+  const duration = 1600;
+  const step = 16;
+  const increment = target / (duration / step);
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) { current = target; clearInterval(timer); }
+    node.nodeValue = Math.floor(current);
+  }, step);
+};
+
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const nums = e.target.querySelectorAll('.result-num, .case-metric-num');
+      nums.forEach(n => animateCount(n));
+      countObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.results-grid, .case-metrics-grid').forEach(el => countObs.observe(el));
+</script>
+</body>
+</html>
