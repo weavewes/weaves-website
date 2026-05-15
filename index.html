@@ -894,10 +894,14 @@ footer {
   .results-header, .tech-header, .testi-inner { grid-template-columns: 1fr; gap: 32px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
+/* MOBILE (640px and down) */
 @media (max-width: 640px) {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
   .nav-left { gap: 0; }
+  .nav-right { gap: 10px; }
+  .nav-ghost { display: none; }
+  .nav-cta { padding: 10px 16px; font-size: 13px; white-space: nowrap; }
   .section, .hero-content, .marquee-label, .results-inner, .feature-inner, .tech-section, .case-inner, .testi-inner, footer { padding-left: 24px; padding-right: 24px; }
   .hero { padding: 120px 0 64px; }
   .section, .results-section, .feature-section, .case-section, .testi-section, .bigcta-section { padding-top: 80px; padding-bottom: 80px; }
