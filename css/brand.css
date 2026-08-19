@@ -1,0 +1,33 @@
+/* =========================================================
+   WEAVES BRAND ASSETS
+   Official logo for dark surfaces.
+   ========================================================= */
+
+.weaves-logo,
+.logo-img {
+    display: block;
+    width: 154px;
+    height: 48px;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+    flex: 0 0 auto;
+}
+
+.nav-logo .weaves-logo {
+    width: 154px;
+}
+
+.footer-logo-row .weaves-logo {
+    width: 154px;
+}
+
+@media (max-width: 768px) {
+    .weaves-logo,
+    .logo-img,
+    .nav-logo .weaves-logo,
+    .footer-logo-row .weaves-logo {
+        width: 128px;
+        height: 40px;
+    }
+}

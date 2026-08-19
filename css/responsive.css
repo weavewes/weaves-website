@@ -69,6 +69,12 @@
         font-size: 1.25rem;
     }
 
+    .logo-img,
+    .weaves-logo {
+        width: 128px;
+        height: 40px;
+    }
+
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -319,6 +325,12 @@
 
     .logo {
         font-size: 1.125rem;
+    }
+
+    .logo-img,
+    .weaves-logo {
+        width: 118px;
+        height: 37px;
     }
 
     .hero {
@@ -779,4 +791,3 @@
     Por ahora mantenemos el dark theme
     */
 }
-
